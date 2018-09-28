@@ -1,5 +1,7 @@
-<?php
+<html><body><?php
 
-  phpinfo();
+  echo "testing";
 
 ?>
+    </body>
+</html>
