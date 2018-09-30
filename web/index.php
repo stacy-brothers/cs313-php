@@ -8,7 +8,7 @@
     $url = array(
         "hello.html",
         "week2.html",
-        "something.html"
+        "something.php"
     );
     
     $notes = array(

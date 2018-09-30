@@ -1,0 +1,32 @@
+.page-title {
+    font-size: 30px;
+    color: darkgreen;
+    width: 100%;
+    text-align: center;
+    border-bottom: 2px solid black;
+    margin-top: 20px;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+.thirds {
+    width: 33%; 
+    float: left;
+}
+
+.redborder {
+    border: 2px solid red;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    width: auto\9; /* ie8 */
+}
+
+.clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
