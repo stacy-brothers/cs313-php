@@ -1,0 +1,45 @@
+.page-title {
+    font-size: 90px;
+    color: black;
+}
+
+.gamebox {
+    width: 140px;
+    height: 200px;
+    float: left;
+}
+
+.listing {
+    width: 400px;
+    float: left;
+    border: 2px solid black;
+    margin: 5px;
+    padding: 10px
+}
+
+.gameinfo {
+    float: left;
+    padding-left: 20px;
+}
+
+.gameTitle {
+    font-size: 25;
+    color: #ab2323;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.gameGenre {
+    font-size: 20;
+}
+
+.gamePrice {
+    font-size: 20;
+    font-weight: bold;
+}
+
+.addBtnBox {
+    font-size: 20;
+    font-weight: bold;
+    margin-top: 30px;
+}

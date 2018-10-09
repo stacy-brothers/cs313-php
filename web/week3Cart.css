@@ -1,0 +1,56 @@
+.cartItem {
+    width: 41%;
+    float: left;
+    border-right: 2px solid black;
+}
+.cartRight { 
+    float: right;
+    width:18%;
+    text-align: right;
+    padding-right: 8px;
+    border-right: 2px solid black;
+}
+
+.cartHeader {
+    background-color: #ff9999;
+    border: 2px solid black;
+    border-right-width: 0px;
+}
+
+.cartHeaderCol {
+    font-size: 25px;
+    font-weight: bold;    
+}
+
+.cartLine { 
+    font-size: 20px;
+    border-bottom: 2px solid black;
+    border-left: 2px solid black;
+}
+
+.shoppingCart {
+    font-size: 40px;
+    font-weight: bold;
+    padding-bottom: 20px;
+}
+.cartTotals {
+    font-size: 20px;
+    font-weight: bold;
+    text-align: right;
+    float: right;
+    width: 15%;
+    padding-right: 10px;
+    padding-top: 10px
+}
+
+.addrLabel {
+    float: left;
+    padding-right: 20px;
+    font-size: 20px;
+    width: 160px;        
+}
+
+.addrInput {
+    float: left;
+    font-size: 20px;
+}
