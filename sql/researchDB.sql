@@ -1,5 +1,6 @@
 
-create database research;
+--create database research;
+-- no permissions to create table in heroku postgres.... :(
 
 -- users of the database
 create table researcher (
