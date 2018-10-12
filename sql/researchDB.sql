@@ -15,7 +15,7 @@ create table researcher (
 create table topic (
     id serial primary key,
     topic varchar(254) not null,
-    researcher_id references researcher(id),
+    researcher_id integer references researcher(id),
     private boolean default false,
     notes text
 );
