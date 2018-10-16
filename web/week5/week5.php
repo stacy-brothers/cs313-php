@@ -47,6 +47,7 @@ catch (PDOException $ex)
                     $comma = "";
                     foreach ($db->query('select keyword from keyword k') as $row) {
                         echo $comma . '"' . $row['keyword'] . '"';
+                        $comma = ', ';
                     }
                 ?>
             ];
