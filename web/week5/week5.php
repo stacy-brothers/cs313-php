@@ -25,7 +25,7 @@ catch (PDOException $ex)
 $keywords = [];
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $keywords = $_POST['keywords'];
-    error_log('----------' . $keywords );
+    error_log('----------' . $keywords[0] );
 }
 
 ?>
