@@ -13,11 +13,11 @@
     
     function resetGameList() {
         $gameList = array(
-            array("title"=>"Adventure", "img"=>"./images/Adventure_Box_Front.jpg","genre"=>"Adventure","price"=>"48.55","inCart"=>"0"),
-            array("title"=>"Berzerk", "img"=>"./images/Berzerk.jpg", "genre"=>"Action","price"=>"10.43","inCart"=>"0"),
-            array("title"=>"Blackjack", "img"=>"./images/Blackjack.jpg", "genre"=>"Simulation","price"=>"12.00","inCart"=>"0"),
-            array("title"=>"Dodge Em", "img"=>"./images/Dodge_Em.jpg", "genre"=>"Action/Racing","price"=>"8.65","inCart"=>"0"),
-            array("title"=>"E.T.", "img"=>"./images/ET.jpg", "genre"=>"Adventure","price"=>"25.99","inCart"=>"0")
+            array("title"=>"Adventure", "img"=>"../images/Adventure_Box_Front.jpg","genre"=>"Adventure","price"=>"48.55","inCart"=>"0"),
+            array("title"=>"Berzerk", "img"=>"../images/Berzerk.jpg", "genre"=>"Action","price"=>"10.43","inCart"=>"0"),
+            array("title"=>"Blackjack", "img"=>"../images/Blackjack.jpg", "genre"=>"Simulation","price"=>"12.00","inCart"=>"0"),
+            array("title"=>"Dodge Em", "img"=>"../images/Dodge_Em.jpg", "genre"=>"Action/Racing","price"=>"8.65","inCart"=>"0"),
+            array("title"=>"E.T.", "img"=>"../images/ET.jpg", "genre"=>"Adventure","price"=>"25.99","inCart"=>"0")
         );
         $_SESSION["gameList"] = $gameList;
     }
@@ -33,7 +33,7 @@
 <html>
     <head>
         <title>CS 313 Assignments Portfolio</title>
-        <link rel="stylesheet" type="text/css" href="./index.css">
+        <link rel="stylesheet" type="text/css" href="../index.css">
         <link rel="stylesheet" type="text/css" href="./week3.css">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
     </head>
@@ -45,7 +45,7 @@
                 </div>
             </div>
             <div class="content">
-                <div class="page-title"><img src="./images/Atari_2600_logo.svg">&nbsp;&nbsp;Game Store&nbsp;&nbsp;&nbsp;<button onclick="gotoCart();">GOTO CART</button></div>
+                <div class="page-title"><img src="../images/Atari_2600_logo.svg">&nbsp;&nbsp;Game Store&nbsp;&nbsp;&nbsp;<button onclick="gotoCart();">GOTO CART</button></div>
                 <div class="gamelist">
                     <?php 
                         for ($i=0; $i<count($gameList); $i++) {
