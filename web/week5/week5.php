@@ -40,26 +40,15 @@ catch (PDOException $ex)
                 <div class="page-title">Research Topics</div>
                 <div style="overflow: auto">
                     <?php
-                        foreach ($db->query('select keyword from keyword k order by keyword') as $row) {
+                        foreach ($db->query('select id,keyword from keyword k order by keyword') as $row) {
                     ?>
-                            <input type="checkbox" name="keywords[]" value="<?=$row['keyword']?>" />
+                    <div><input type="checkbox" name="keywords[]" value="<?=$row['id']?>" /><?=$row['keyword']?></div>
                     <?php
                         }
                     ?>
                 </div>
             </div>
-        </div>
-        <script type="text/javascript"> 
-            var keywords = [
-                <?php
-                    $comma = "";
-                    foreach ($db->query('select keyword from keyword k order by keyword') as $row) {
-                        echo $comma . '"' . $row['keyword'] . '"';
-                        $comma = ', ';
-                    }
-                ?>
-            ];
-        </script>
+        </div>        
     </body>
 </html>
 
