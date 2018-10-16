@@ -22,6 +22,12 @@ catch (PDOException $ex)
   die();
 }
 
+$keywords = [];
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $keywords = $_POST['keywords'];
+    error_log('----------' . $keywords );
+}
+
 ?>
 <html>
     <head>
@@ -39,16 +45,23 @@ catch (PDOException $ex)
             <div class="content">
                 <div class="page-title">Research Topics</div>
                 <div style="overflow: auto">
+                    <form method="post" id="keysForm" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
                     <?php
                         foreach ($db->query('select id,keyword from keyword k order by keyword') as $row) {
                     ?>
-                    <div><input type="checkbox" name="keywords[]" value="<?=$row['id']?>" /><?=$row['keyword']?></div>
+                        <div><input type="checkbox" name="keywords[]" value="<?=$row['id']?>" onchange="didCheckBox();"/><?=$row['keyword']?></div>
                     <?php
                         }
                     ?>
+                    </form>
                 </div>
             </div>
-        </div>        
+        </div>
+        <script type="text/javascript">
+            didCheckBox() { 
+                document.getElementById("keysForm").submit();
+            }
+        </script>
     </body>
 </html>
 
