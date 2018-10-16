@@ -58,7 +58,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
         </div>
         <script type="text/javascript">
-            didCheckBox() { 
+            function didCheckBox() { 
                 alert("submitting!");
                 document.getElementById("keysForm").submit();
             }
