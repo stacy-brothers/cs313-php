@@ -49,7 +49,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <?php
                         foreach ($db->query('select id,keyword from keyword k order by keyword') as $row) {
                     ?>
-                        <div><input type="checkbox" name="keywords[]" value="<?=$row['id']?>" onchange="didCheckBox();"/><?=$row['keyword']?></div>
+                        <div><input type="checkbox" name="keywords[]" value="<?=$row['id']?>" onclick="didCheckBox();"/><?=$row['keyword']?></div>
                     <?php
                         }
                     ?>
@@ -59,6 +59,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </div>
         <script type="text/javascript">
             didCheckBox() { 
+                alert("submitting!");
                 document.getElementById("keysForm").submit();
             }
         </script>
