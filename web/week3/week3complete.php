@@ -21,7 +21,7 @@
 <html>
     <head>
         <title>CS 313 Assignments Portfolio</title>
-        <link rel="stylesheet" type="text/css" href="./index.css">
+        <link rel="stylesheet" type="text/css" href="../index.css">
         <link rel="stylesheet" type="text/css" href="./week3.css">
         <link rel="stylesheet" type="text/css" href="./week3Cart.css">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
@@ -34,7 +34,7 @@
                 </div>
             </div>
             <div class="content">
-                <div class="page-title"><img src="./images/Atari_2600_logo.svg">&nbsp;&nbsp;Game Store</div>
+                <div class="page-title"><img src="../images/Atari_2600_logo.svg">&nbsp;&nbsp;Game Store</div>
                 <div class="shoppingCart">Your Order is being Processed!</div>
                 <div class="clearfix cartHeader">
                     <div class="cartItem cartHeaderCol">Game Title</div>
