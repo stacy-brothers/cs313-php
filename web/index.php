@@ -4,23 +4,35 @@
         "Week 2 Team - Reviewing client side html constructs.",
         "Week 2 Assignment - Something that interests me...", 
         "Week 3 Team - PHP Forms.",
-        "Week 3 - Store front."
+        "Week 3 - Store front.",
+        "Week 4 Team - Conference SQL",
+        "Week 4 - Project DB", 
+        "Week 5 Team - Scripture DB",
+        "Week 5 - Project DB query screens"
     );
     
     $url = array(
         "hello.html",
-        "week2.html",
+        "week2/week2.html",
         "something.php",
-        "week3Team.php",
-        "week3.php"
+        "week3/week3Team.php",
+        "week3/week3.php", 
+        "sql/week4Team.sql",
+        "sql/researchDB.sql",
+        "week5/week5Team.php",
+        "week5/week5.php"
     );
     
     $notes = array(
         "This is the classic hello world assignment.  The big thing here was to figure out GitLab, Huroku.",
-        "A basic review of what was done in the class before this one.  Basically just a web page that has some CSS applied to it and a little bit of JavaScript.  It was a supposed to be a \"Team\" assignment but we didn't have teams yet so I did it all myself. Code on <a href='https://github.com/stacy-brothers/cs313-php/blob/master/web/week2.html'>GitHub</a>.",
+        "A basic review of what was done in the class before this one.  Basically just a web page that has some CSS applied to it and a little bit of JavaScript.  It was a supposed to be a \"Team\" assignment but we didn't have teams yet so I did it all myself. Code on <a href='https://github.com/stacy-brothers/cs313-php/blob/master/web/week2/week2.html'>GitHub</a>.",
         "This assignment was to build this page and another page that was about something that interests me.  The toughest part of this assignment was deciding which of the too many things that interest me to use.  As I am typing this I still don't know what it is going to be.  Click the chevron at the right to find out! Code on <a href='https://github.com/stacy-brothers/cs313-php/blob/master/web/something.php'>GitHub</a>.",
-        "In this assignment we create an html form and then post it to the same page on submit.  Php code validates input and cleans it up to protect from injection attacks.  Majors are stored in an array.  Countries are stored in an associative array.  Inputs are generated dynamically off the arrays.  Code on <a href='https://github.com/stacy-brothers/cs313-php/blob/master/web/week3Team.php'>GitHub</a>.",
-        ""
+        "In this assignment we create an html form and then post it to the same page on submit.  Php code validates input and cleans it up to protect from injection attacks.  Majors are stored in an array.  Countries are stored in an associative array.  Inputs are generated dynamically off the arrays.  Code on <a href='https://github.com/stacy-brothers/cs313-php/blob/master/web/week3/week3Team.php'>GitHub</a>.",
+        "Atari 2600 classic game cartridge store front. Code on <a href='https://github.com/stacy-brothers/cs313-php/blob/master/web/week3/week3.php'>GitHub</a>.",
+        "SQL for Conference DB",
+        "SQL for term project.",
+        "Listing of values from scripture postgres DB.",
+        "Start of term project.  Search and detail screen."
     );
 
 ?>
