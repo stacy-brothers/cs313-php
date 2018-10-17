@@ -25,7 +25,11 @@ catch (PDOException $ex)
 $keywords = [];
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $keywords = $_POST['keywords'];
-    error_log('----------' . $keywords[0] );
+    
+    foreach ( $keywords as $keyId ) {
+        $keys = $comma . $keyId;
+    }
+    error_log('----------' . $keys );
 }
 
 ?>
