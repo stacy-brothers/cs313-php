@@ -37,6 +37,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $query = $query . 'where t.id = tk.topic_id and tk.keyword_id in (' . $keys . ')';
     
     $topics = $db->query($query);
+    
+    error_log($topics);
 }
 
 ?>
