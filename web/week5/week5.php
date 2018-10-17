@@ -25,13 +25,18 @@ catch (PDOException $ex)
 $keywords = [];
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $keywords = $_POST['keywords'];
-    
+    error_log("----------keywords: " . $keywords);
     $comma = "";
     foreach ( $keywords as $keyId ) {
-        $keys = $comma . $keyId;
+        $keys += $comma . $keyId;
         $comma = ",";
     }
     error_log('-----------keys list:' . $keys );
+    
+    $query = 'select t.id, t.topic, t.researcher_id, t.notes from topic t, topic_keyword tk ';
+    $query += 'where t.id = tk.topic_id and tk.keyword_id in (' . $keys . ')';
+    
+    $topics = $db->query($query);
 }
 
 ?>
