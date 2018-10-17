@@ -26,10 +26,12 @@ $keywords = [];
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $keywords = $_POST['keywords'];
     
+    $comma = "";
     foreach ( $keywords as $keyId ) {
         $keys = $comma . $keyId;
+        $comma = ",";
     }
-    error_log('----------' . $keys );
+    error_log('-----------keys list:' . $keys );
 }
 
 ?>
