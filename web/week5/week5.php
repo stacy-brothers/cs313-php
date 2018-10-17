@@ -49,7 +49,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <?php
                         foreach ($db->query('select id,keyword from keyword k order by keyword') as $row) {
                     ?>
-                        <div><input type="checkbox" name="keywords[]" value="<?=$row['id']?>" onclick="didCheckBox();"/><?=$row['keyword']?></div>
+                        <div><input type="checkbox" name="keywords[]" value="<?=$row['id']?>" onclick="didCheckBox();" <?php if (isset($keywords) && in_array($row['id'], $keywords)) echo "checked";?>/><?=$row['keyword']?></div>
                     <?php
                         }
                     ?>
