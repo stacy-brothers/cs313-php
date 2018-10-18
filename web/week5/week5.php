@@ -56,7 +56,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </div>
                 <div>
                     <?php
-                        if ( isset($keywords) ) {
+                        if ( isset($keywords) && count($keywords) > 0) {
                             error_log("----------keywords: " . $keywords);
                             $comma = "";
                             foreach ( $keywords as $keyId ) {
