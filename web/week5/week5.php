@@ -40,6 +40,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     foreach ($topics as $topic) {
         error_log($topic['topic']);
     }
+}
 ?>
 <html>
     <head>
