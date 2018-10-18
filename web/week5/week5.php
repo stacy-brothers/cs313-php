@@ -25,20 +25,22 @@ catch (PDOException $ex)
 $keywords = [];
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $keywords = $_POST['keywords'];
-    error_log("----------keywords: " . $keywords);
-    $comma = "";
-    foreach ( $keywords as $keyId ) {
-        $keys = $keys . $comma . $keyId;
-        $comma = ",";
-    }
-    error_log('-----------keys list:' . $keys );
-    
-    $query = 'select t.id, t.topic, t.researcher_id, t.notes from topic t, topic_keyword tk ';
-    $query = $query . 'where t.id = tk.topic_id and tk.keyword_id in (' . $keys . ')';
-    
-    $topics = $db->query($query);
-    foreach ($topics as $topic) {
-        error_log($topic['topic']);
+    if ( isset($keywords) ) {
+        error_log("----------keywords: " . $keywords);
+        $comma = "";
+        foreach ( $keywords as $keyId ) {
+            $keys = $keys . $comma . $keyId;
+            $comma = ",";
+        }
+        error_log('-----------keys list:' . $keys );
+
+        $query = 'select t.id, t.topic, t.researcher_id, t.notes from topic t, topic_keyword tk ';
+        $query = $query . 'where t.id = tk.topic_id and tk.keyword_id in (' . $keys . ')';
+
+        $topics = $db->query($query);
+        foreach ($topics as $topic) {
+            error_log($topic['topic']);
+        }
     }
 }
 ?>
@@ -68,11 +70,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     ?>
                     </form>
                 </div>
+                <div>
+                    <?php
+                        if ( isset($topics) ) {
+                            foreach ($topics as $topic) {
+                                echo "<div>" . $topic['topic'] . "</div>";
+                            }
+                        }
+                    ?>
+                </div>
             </div>
         </div>
         <script type="text/javascript">
             function didCheckBox() { 
-                alert("submitting!");
                 document.getElementById("keysForm").submit();
             }
         </script>
