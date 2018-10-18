@@ -25,24 +25,8 @@ catch (PDOException $ex)
 $keywords = [];
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $keywords = $_POST['keywords'];
-    if ( isset($keywords) ) {
-        error_log("----------keywords: " . $keywords);
-        $comma = "";
-        foreach ( $keywords as $keyId ) {
-            $keys = $keys . $comma . $keyId;
-            $comma = ",";
-        }
-        error_log('-----------keys list:' . $keys );
-
-        $query = 'select t.id, t.topic, t.researcher_id, t.notes from topic t, topic_keyword tk ';
-        $query = $query . 'where t.id = tk.topic_id and tk.keyword_id in (' . $keys . ')';
-
-        $topics = $db->query($query);
-        foreach ($topics as $topic) {
-            error_log($topic['topic']);
-        }
-    }
 }
+
 ?>
 <html>
     <head>
@@ -72,12 +56,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </div>
                 <div>
                     <?php
-                        error_log("checking to see if topics is set...");
-                        if ( isset($topics) ) {
-                            error_log("topics is set...");
+                        if ( isset($keywords) ) {
+                            error_log("----------keywords: " . $keywords);
+                            $comma = "";
+                            foreach ( $keywords as $keyId ) {
+                                $keys = $keys . $comma . $keyId;
+                                $comma = ",";
+                            }
+                            error_log('-----------keys list:' . $keys );
+
+                            $query = 'select t.id, t.topic, t.researcher_id, t.notes from topic t, topic_keyword tk ';
+                            $query = $query . 'where t.id = tk.topic_id and tk.keyword_id in (' . $keys . ')';
+
+                            $topics = $db->query($query);
                             foreach ($topics as $topic) {
-                                error_log("should be outputting " . $topic['topic']);
-                                echo "<div>" . $topic['topic'] . "</div>";
+                                error_log($topic['topic']);
+                                echo "<div>" . $topic . "</div>";
                             }
                         }
                     ?>
