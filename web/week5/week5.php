@@ -76,6 +76,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         if ( isset($topics) ) {
                             error_log("topics is set...");
                             foreach ($topics as $topic) {
+                                error_log("should be outputting " . $topic['topic']);
                                 echo "<div>" . $topic['topic'] . "</div>";
                             }
                         }
