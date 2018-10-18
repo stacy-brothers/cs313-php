@@ -38,7 +38,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
     $topics = $db->query($query);
     
-    error_log($topics);
+    error_log($topics[0]['id']);
 }
 
 ?>
