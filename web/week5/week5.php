@@ -72,7 +72,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             $topics = $db->query($query);
                             foreach ($topics as $topic) {
                                 error_log($topic['topic']);
-                                echo "<div>" . $topic . "</div>";
+                                echo "<div>" . $topic['topic'] . "</div>";
                             }
                         }
                     ?>
