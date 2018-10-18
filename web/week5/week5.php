@@ -60,6 +60,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             error_log("----------keywords: " . $keywords);
                             $comma = "";
                             foreach ( $keywords as $keyId ) {
+                                error_log("keywords should have values");
                                 $keys = $keys . $comma . $keyId;
                                 $comma = ",";
                             }
