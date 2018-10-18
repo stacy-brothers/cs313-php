@@ -72,7 +72,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </div>
                 <div>
                     <?php
+                        error_log("checking to see if topics is set...");
                         if ( isset($topics) ) {
+                            error_log("topics is set...");
                             foreach ($topics as $topic) {
                                 echo "<div>" . $topic['topic'] . "</div>";
                             }
