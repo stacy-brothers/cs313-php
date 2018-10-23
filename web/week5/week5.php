@@ -69,7 +69,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             while ( $row = $stmt->fetch() ) { 
                                 $topics[$row['id']] = $row;
                             }
-                            
+                            print_r($topics);
+                            for ( $x = 1; $x < count($keywords); $x++ ) {
+                                
+                                $stmt->bindParam(':kw', $keywords[$x]);
+                                $stmt->execute();
+                                
+                                $newTopics = array();
+                                while ( $row = $stmt->fetch() ) { 
+                                    if ( isset($topics[$row['id']]) ) {
+                                        $newTopics[$row['id']] = $row;
+                                    }
+                                }
+                                $topics = $newTopics;
+                            }
                             print_r($topics);
 //                            $comma = "";
 //                            foreach ( $keywords as $keyId ) {
