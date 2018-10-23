@@ -58,22 +58,31 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <?php
                         if ( isset($keywords) && count($keywords) > 0) {
                             error_log("----------keywords: " . $keywords);
-                            $comma = "";
-                            foreach ( $keywords as $keyId ) {
-                                error_log("keywords should have values");
-                                $keys = $keys . $comma . $keyId;
-                                $comma = ",";
-                            }
-                            error_log('-----------keys list:' . $keys );
-
+                            // start with one of the keywords and then reduce the list by the others
                             $query = 'select t.id, t.topic, t.researcher_id, t.notes from topic t, topic_keyword tk ';
-                            $query = $query . 'where t.id = tk.topic_id and tk.keyword_id in (' . $keys . ')';
-
-                            $topics = $db->query($query);
-                            foreach ($topics as $topic) {
-                                error_log($topic['topic']);
-                                echo "<div>" . $topic['topic'] . "</div>";
+                            $query = $query . 'where t.id = tk.topic_id and tk.keyword_id = :kw';
+                            $stmt = $db->prepare($query);
+                            $stmt->bindParam(':kw', $keywords[0]);
+                            $stmt->execute();
+                            //$rslt = $stmt->setFetchMode(PDO::FETCH_ASSOC)
+                            while ( $row = $stmt->fetch() ) { 
+                                echo "<div>" . row['topic'] . "</div>";
                             }
+//                            $comma = "";
+//                            foreach ( $keywords as $keyId ) {
+//                                error_log("keywords should have values");
+//                                $keys = $keys . $comma . $keyId;
+//                                $comma = ",";
+//                            }
+//                            error_log('-----------keys list:' . $keys );
+//
+//                             in (' . $keys . ')';
+//
+//                            $topics = $db->query($query);
+//                            foreach ($topics as $topic) {
+//                                error_log($topic['topic']);
+//                                echo "<div>" . $topic['topic'] . "</div>";
+//                            }
                         }
                     ?>
                 </div>
