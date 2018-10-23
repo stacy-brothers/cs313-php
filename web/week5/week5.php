@@ -57,7 +57,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <div>
                     <?php
                         if ( isset($keywords) && count($keywords) > 0) {
-                            error_log("----------keywords: " . $keywords);
+                            error_log("----------keywords[0]: " . $keywords[0]);
                             // start with one of the keywords and then reduce the list by the others
                             $query = 'select t.id, t.topic, t.researcher_id, t.notes from topic t, topic_keyword tk ';
                             $query = $query . 'where t.id = tk.topic_id and tk.keyword_id = :kw';
@@ -66,7 +66,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             $stmt->execute();
                             //$rslt = $stmt->setFetchMode(PDO::FETCH_ASSOC)
                             while ( $row = $stmt->fetch() ) { 
-                                echo "<div>" . row['topic'] . "</div>";
+                                echo "<div>" . $row['topic'] . "</div>";
                             }
 //                            $comma = "";
 //                            foreach ( $keywords as $keyId ) {
