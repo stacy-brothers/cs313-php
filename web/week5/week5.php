@@ -64,10 +64,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             $stmt = $db->prepare($query);
                             $stmt->bindParam(':kw', $keywords[0]);
                             $stmt->execute();
+                            $topics = array();
                             //$rslt = $stmt->setFetchMode(PDO::FETCH_ASSOC)
                             while ( $row = $stmt->fetch() ) { 
-                                echo "<div>" . $row['topic'] . "</div>";
+                                $topics[$row['id']] = $row;
                             }
+                            
+                            print_r($topics);
 //                            $comma = "";
 //                            foreach ( $keywords as $keyId ) {
 //                                error_log("keywords should have values");
