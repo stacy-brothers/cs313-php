@@ -69,8 +69,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             while ( $row = $stmt->fetch() ) { 
                                 $topics[$row['id']] = $row;
                             }
-                            echo 'first<br>';
-                            print_r($topics);
+                            
                             for ( $x = 1; $x < count($keywords); $x++ ) {
                                 
                                 $stmt->bindParam(':kw', $keywords[$x]);
@@ -84,23 +83,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                 }
                                 $topics = $newTopics;
                             }
-                            echo 'second<br>';
-                            print_r($topics);
-//                            $comma = "";
-//                            foreach ( $keywords as $keyId ) {
-//                                error_log("keywords should have values");
-//                                $keys = $keys . $comma . $keyId;
-//                                $comma = ",";
-//                            }
-//                            error_log('-----------keys list:' . $keys );
-//
-//                             in (' . $keys . ')';
-//
-//                            $topics = $db->query($query);
-//                            foreach ($topics as $topic) {
-//                                error_log($topic['topic']);
-//                                echo "<div>" . $topic['topic'] . "</div>";
-//                            }
+                                                        
+                            foreach ($topics as $topic) {
+                                error_log($topic['topic']);
+                                echo "<div>" . $topic['topic'] . "</div>";
+                            }
                         }
                     ?>
                 </div>
