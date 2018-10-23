@@ -65,10 +65,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             $stmt->bindParam(':kw', $keywords[0]);
                             $stmt->execute();
                             $topics = array();
-                            //$rslt = $stmt->setFetchMode(PDO::FETCH_ASSOC)
+                            $rslt = $stmt->setFetchMode(PDO::FETCH_ASSOC);
                             while ( $row = $stmt->fetch() ) { 
                                 $topics[$row['id']] = $row;
                             }
+                            echo 'first<br>';
                             print_r($topics);
                             for ( $x = 1; $x < count($keywords); $x++ ) {
                                 
@@ -83,6 +84,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                 }
                                 $topics = $newTopics;
                             }
+                            echo 'second<br>';
                             print_r($topics);
 //                            $comma = "";
 //                            foreach ( $keywords as $keyId ) {
