@@ -55,8 +55,8 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
                             $stmt->setFetchMode(PDO::FETCH_ASSOC);
                             $row = $stmt->fetch();
                             error_log("-----------again:" . $row['id']);                                                        
-                            echo '<div>Topic: ' . $row['topic'] . "</div>";
-                            echo '<div>Notes:' .  $row['notes'] . "</div>";
+                            echo '<div>Topic: ' . $row['topic'] . "<br></div>";
+                            echo '<div>Notes:' .  $row['notes'] . "<br></div>";
                             // get the keywords...
                             echo '<div>Keywords:'  ;
                             $keyQuery = 'select k.keyword from keyword k, topic_keyword tk where k.id = tk.keyword_id and tk.topic_id = :id';
@@ -66,7 +66,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
                             foreach( $keyStmt->fetchAll() as $keyRow ) {
                                 echo ' ' . $keyRow['keyword'];
                             }
-                            echo "<div>References:</div>";
+                            echo "<div><br>References:</div>";
                             // get the reference urls...
                             $refQuery = 'select url, descr from ref_url r where topic_id = :id';
                             $refStmt = $db->prepare($refQuery);
