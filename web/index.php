@@ -31,8 +31,8 @@
         "Atari 2600 classic game cartridge store front. Code on <a href='https://github.com/stacy-brothers/cs313-php/blob/master/web/week3'>GitHub</a>.",
         "SQL for Conference DB.  <a href='https://github.com/stacy-brothers/cs313-php/blob/master/web/sql/week4Team.sql'>Github</a>",
         "SQL for term project. <a href='https://github.com/stacy-brothers/cs313-php/blob/master/web/sql/researchDB.sql'>Github</a>",
-        "Listing of values from scripture postgres DB.",
-        "Start of term project.  Search and detail screen."
+        "Listing of values from scripture postgres DB. <a href='https://github.com/stacy-brothers/cs313-php/blob/master/web/week5'>Github</a>",
+        "Start of term project.  Search and detail screen.  <a href='https://github.com/stacy-brothers/cs313-php/blob/master/web/week5'>Github</a>"
     );
 
 ?>
