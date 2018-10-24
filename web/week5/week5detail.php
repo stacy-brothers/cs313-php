@@ -48,7 +48,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
                             error_log("----------id: " . $id);
                             // start with one of the keywords and then reduce the list by the others
                             $query = 'select id, topic, researcher_id, notes from topic ';
-                            $query = $query . 'where t.id = :id';
+                            $query = $query . 'where id = :id';
                             $stmt = $db->prepare($query);
                             $stmt->bindParam(':id', $id);
                             $stmt->execute();
