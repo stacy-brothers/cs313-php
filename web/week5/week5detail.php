@@ -66,8 +66,15 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
                             foreach( $keyStmt->fetchAll() as $keyRow ) {
                                 echo ' ' . $keyRow['keyword'];
                             }
+                            echo "<div>References:</div>";
                             // get the reference urls...
-                            
+                            $refQuery = 'select url, descr from ref_url r where topic_id = :id';
+                            $refStmt = $db->prepare($refQuery);
+                            $refStmt->bindParam(':id', $id);
+                            $refStmt->execute();
+                            foreach( $refStmt->fetchAll() as $refRow ) {
+                                echo '<div>' . $refRow['descr'] . '</div><div><a href="' . $refRow['url'] . "'>" . $refRow['url'] . "</a></div>";
+                            }
                         }
                     ?>
                 </div>
