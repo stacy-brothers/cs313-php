@@ -47,15 +47,27 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
                         if ( isset($id) ) {
                             error_log("----------id: " . $id);
                             // start with one of the keywords and then reduce the list by the others
-                            $query = 'select t.id, t.topic, t.researcher_id, t.notes from topic t, topic_keyword tk ';
+                            $query = 'select id, topic, researcher_id, notes from topic ';
                             $query = $query . 'where t.id = :id';
                             $stmt = $db->prepare($query);
                             $stmt->bindParam(':id', $id);
                             $stmt->execute();
-                            $rslt = $stmt->setFetchMode(PDO::FETCH_ASSOC);
+                            $stmt->setFetchMode(PDO::FETCH_ASSOC);
                             $row = $stmt->fetch();
                             error_log("-----------again:" . $row['id']);                                                        
-                            echo '<div>' . $row['topic'] . "</div><div>" .  $row['notes'] . "</div>";
+                            echo '<div>Topic: ' . $row['topic'] . "</div>";
+                            echo '<div>Notes:' .  $row['notes'] . "</div>";
+                            // get the keywords...
+                            echo '<div>Keywords:'  ;
+                            $keyQuery = 'select k.keyword from keyword k, topic_keyword tk where k.id = tk.keyword_id and tk.topic_id = :id';
+                            $keyStmt = $db->prepare($keyQuery);
+                            $keyStmt->bindParam(':id', $id);
+                            $keyStmt->execute();
+                            foreach( $keyStmt->fetchAll() as $keyRow ) {
+                                echo ' ' . $keyRow['keyword'];
+                            }
+                            // get the reference urls...
+                            
                         }
                     ?>
                 </div>
