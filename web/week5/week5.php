@@ -86,7 +86,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                                         
                             foreach ($topics as $topic) {
                                 error_log($topic['topic']);
-                                echo "<div>" . $topic['topic'] . "</div>";
+                                echo "<div onclick='gotoTopic(" . $topic['id'] . ");'>" . $topic['topic'] . "</div>";
                             }
                         }
                     ?>
@@ -96,6 +96,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <script type="text/javascript">
             function didCheckBox() { 
                 document.getElementById("keysForm").submit();
+            }
+            
+            function gotoTopic(id){
+                window.location.href = 'week5detail.php?id=' + id;
             }
         </script>
     </body>
