@@ -73,7 +73,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
                             $refStmt->bindParam(':id', $id);
                             $refStmt->execute();
                             foreach( $refStmt->fetchAll() as $refRow ) {
-                                echo '<div>' . $refRow['descr'] . '</div><div><a href="' . $refRow['url'] . "'>" . $refRow['url'] . "</a></div>";
+                                echo '<div>' . $refRow['descr'] . ' - <a href="' . $refRow['url'] . '">' . $refRow['url'] . "</a></div>";
                             }
                         }
                     ?>
