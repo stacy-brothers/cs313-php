@@ -55,10 +55,10 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
                             $stmt->setFetchMode(PDO::FETCH_ASSOC);
                             $row = $stmt->fetch();
                             error_log("-----------again:" . $row['id']);                                                        
-                            echo '<div>Topic: ' . $row['topic'] . "<br></div>";
-                            echo '<div>Notes:' .  $row['notes'] . "<br></div>";
+                            echo '<div>Topic: ' . $row['topic'] . "</div>";
+                            echo '<div><br>Notes:' .  $row['notes'] . "<br></div>";
                             // get the keywords...
-                            echo '<div>Keywords:'  ;
+                            echo '<div><br>Keywords:'  ;
                             $keyQuery = 'select k.keyword from keyword k, topic_keyword tk where k.id = tk.keyword_id and tk.topic_id = :id';
                             $keyStmt = $db->prepare($keyQuery);
                             $keyStmt->bindParam(':id', $id);
