@@ -75,14 +75,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $insertSql = "insert into scripture ( book, chapter, verse, content ) values ( :book, :chapter, :verse, :content )";
         try {
             $stmt = $db->prepare($insertSql);
-            $stmt->execute(array($book, $chapter, $verse, $content));
+            if ( $stmt->execute(array($book, $chapter, $verse, $content)) === TRUE ) {
+                $scriptId = $db->lastInsertId();
+                // add the s_t_xref
+                $insertXrefSql = "insert into s_t_xref ( topics_id, scripture_id ) values ( ?, ? ) ";
+                $newInsert = $db->prepare($insertXrefSql);
+                foreach($topics as $topicId) { 
+                    $newInsert->execute(array($topicId,$scriptId));
+                }                
+            }
         } catch (PDOException $ex) {
             echo "--------- Error adding scripture: " . $ex->getMessage();
             $addError = "Error adding scripture: " . $ex->getMessage();
             $good = FALSE;
         }
         
-        // add the s_t_xref 
+        
         
         // if successful then go to the list
         
