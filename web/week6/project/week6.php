@@ -72,11 +72,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                 error_log("searchStr is set: " . $searchStr);
                                 $searchStr = "%" . $searchStr . "%";
                                 $query = $query . $word . " ( t.topic like :searchStr or t.notes like :searchStr )";
-                                $stmt->bindParam(":searchStr", $searchStr);
                             }
                             $stmt = $db->prepare($query);
                             if (isset($keywords) && count($keywords) > 0) {
                                 $stmt->bindParam(':kw', $keywords[0]);
+                            }
+                            if ( isset($searchStr) && $searchStr!=='') {
+                                $stmt->bindParam(":searchStr", $searchStr);
                             }
                             $stmt->execute();
                             $topics = array();
