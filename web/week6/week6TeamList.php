@@ -41,10 +41,13 @@
                 <div class="page-title">Scripture List</div>
                     <div>
                         <?php
-                            foreach ($db->query('select book, chapter, verse, content FROM scripture') as $row) {
+                            foreach ($db->query('select id, book, chapter, verse, content FROM scripture') as $row) {
                                 $topics = "Topics: ";
                                 $comma = "";
-                                foreach ($db->query('SELECT id, name FROM script_topics') as $trow) {
+                                $xrefQuery = "select s.name from script_topics s, s_t_xref x where s.id = x.topics_id and x.scripture_id = ?";
+                                $xrefStmt = $db->prepare($xrefQuery);
+                                $xrefRows = $xrefStmt->execute(array($row['id']));
+                                foreach ($xrefRows as $trow) {
                                     $topics = $topics . $comma . $trow['name'];
                                     $comma = ", ";
                                 }
@@ -58,11 +61,16 @@
                         ?>
                     </div>
                     <div>
-                        <button>Add</button>
+                        <button onclick="gotoAdd();">Add Another Scripture</button>
                     </div>
                 </form>
             </div>
         </div>
+        <script type="text/javascript">
+            function gotoAdd() {
+                window.location = 'week6Team.php';
+            }
+        </script>
     </body>
 </html>
 
