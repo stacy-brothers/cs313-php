@@ -69,6 +69,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                 $word = ' and ';
                             }
                             if ( isset($searchStr) ) {
+                                error_log("searchStr is set: " . $searchStr);
                                 $searchStr = "%" . $searchStr . "%";
                                 $query = $query . $word . " ( t.topic like :searchStr or t.notes like :searchStr )";
                                 $stmt->bindParam(":searchStr", $searchStr);
