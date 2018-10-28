@@ -107,6 +107,7 @@ function fix_input($data) {
                 ?>
                 <form action="week6detail.php" method="POST">                    
                 <div class="page-title"><?=$topic?><button>save</button></div>
+                <input type="hidden" name="id" value="<?=$id?>">
                 <div>
                         <div>Topic</div><div><input type="text" name="topic" value="<?=$topic?>"><br></div>
                         <div>Notes</div><div><textarea name="notes" cols="80" rows="20"><?=$notes?></textarea><br></div>
