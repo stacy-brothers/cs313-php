@@ -62,16 +62,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $contentErr = "Content is required";
             $good = FALSE;
         } else {
-            $content = fix_input($_POST["verse"]);
-            if (!preg_match("/^[0-9]*$/",$verse)) {
-                $verseErr = "Only numbers allowed";
-                $good = FALSE;
-            }
+            $content = fix_input($_POST["content"]);
         }
         
         $topics = $_POST["topics"];
         
         error_log( "Adding: " . $book . " " . $chapter . ":" . $verse);
+        error_log( "Content: " . $content);
+        error_log("Topics: " . $topics);
     }
     
     function fix_input($data) {
