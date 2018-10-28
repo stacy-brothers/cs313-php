@@ -68,7 +68,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                 $query = $query . $word . 't.id = tk.topic_id and tk.keyword_id = :kw';
                                 $word = ' and ';
                             }
-                            if ( isset($searchStr) ) {
+                            if ( isset($searchStr) && $searchStr!=='') {
                                 error_log("searchStr is set: " . $searchStr);
                                 $searchStr = "%" . $searchStr . "%";
                                 $query = $query . $word . " ( t.topic like :searchStr or t.notes like :searchStr )";
