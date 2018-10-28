@@ -46,6 +46,12 @@ catch (PDOException $ex)
                         <div>Chapter</div><div><input id='chapter' type="text"></div>
                     </div>
                     <div>
+                        <div>Verse</div><div><input id='verse' type="text"></div>
+                    </div>
+                    <div>
+                        <div>content</div><div><textarea id='content' type="text" cols="50" rows="5"></textarea></div>
+                    </div>
+                    <div>
                         <button>Add</button>
                     </div>
                 </form>
