@@ -63,9 +63,9 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
                 <div class="page-title"><?=$row['topic']?></div>
                 <div>
                     <form action="week6detail.php">                    
-                        <div>Topic</div><div><input type="text" name="topic" value="<?=$row['topic']?>"></div>
-                        <div>Notes</div><div><textarea name="notes" cols="80" rows="20"><?=$row['notes']?></textarea></div>
-                        <div><br>Keywords:
+                        <div>Topic</div><div><input type="text" name="topic" value="<?=$row['topic']?>"><br></div>
+                        <div>Notes</div><div><textarea name="notes" cols="80" rows="20"><?=$row['notes']?></textarea><br></div>
+                        <div>Keywords:
                         <?php 
                                 $keyQuery = 'select k.keyword from keyword k, topic_keyword tk where k.id = tk.keyword_id and tk.topic_id = :id';
                                 $keyStmt = $db->prepare($keyQuery);
@@ -75,7 +75,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
                                     echo ' ' . $keyRow['keyword'];
                                 }
                         ?>
-                        </div>
+                            <br></div>
                         <div>References:</div>
                         <?php
                                 // get the reference urls...
@@ -90,6 +90,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
                                 }
                             }
                         ?>
+                        <br>
                     </form>
                 </div>
             </div>
