@@ -1,63 +1,51 @@
 <?php
 
-try
-{
-  $dbUrl = getenv('DATABASE_URL');
+    try
+    {
+      $dbUrl = getenv('DATABASE_URL');
 
-  $dbOpts = parse_url($dbUrl);
+      $dbOpts = parse_url($dbUrl);
 
-  $dbHost = $dbOpts["host"];
-  $dbPort = $dbOpts["port"];
-  $dbUser = $dbOpts["user"];
-  $dbPassword = $dbOpts["pass"];
-  $dbName = ltrim($dbOpts["path"],'/');
+      $dbHost = $dbOpts["host"];
+      $dbPort = $dbOpts["port"];
+      $dbUser = $dbOpts["user"];
+      $dbPassword = $dbOpts["pass"];
+      $dbName = ltrim($dbOpts["path"],'/');
 
-  $db = new PDO("pgsql:host=$dbHost;port=$dbPort;dbname=$dbName", $dbUser, $dbPassword);
+      $db = new PDO("pgsql:host=$dbHost;port=$dbPort;dbname=$dbName", $dbUser, $dbPassword);
 
-  $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-}
-catch (PDOException $ex)
-{
-  echo 'Error!: ' . $ex->getMessage();
-  die();
-}
+      $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    }
+    catch (PDOException $ex)
+    {
+      echo 'Error!: ' . $ex->getMessage();
+      die();
+    }
+    
+    $book = "";
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
         error_log("Doing POST!");
         if (empty($_POST["book"])) {
             $bookErr = "Book is required";
             $good = FALSE;
         } else {
-            $book = test_input($_POST["book"]);
-            // check if name only contains numbers, letters and whitespace
+            $book = fix_input($_POST["book"]);
+            // check if book only contains number, letters and whitespace
             if (!preg_match("/^[0-9a-zA-Z ]*$/",$book)) {
                 $bookErr = "Only numbers, letters and white space allowed";
                 $good = FALSE;
             }
         }
-        if (empty($_POST["chapter"])) {
-            $chapterErr = "Book is required";
-            $good = FALSE;
-        } else {
-            $chapter = test_input($_POST["chapter"]);
-            // check if name only contains numbers, letters and whitespace
-            if (!preg_match("/^[0-9a-zA-Z ]*$/",$chapter)) {
-                $chapterErr = "Only numbers, letters and white space allowed";
-                $good = FALSE;
-            }
-        }
-        if (empty($_POST["verse"])) {
-            $verseErr = "Book is required";
-            $good = FALSE;
-        } else {
-            $verse = test_input($_POST["verse"]);
-            // check if name only contains numbers, letters and whitespace
-            if (!preg_match("/^[0-9a-zA-Z ]*$/",$verse)) {
-                $verseErr = "Only numbers, letters and white space allowed";
-                $good = FALSE;
-            }
-        }
+    } 
+    
+    function fix_input($data) {
+        $data = trim($data);
+        $data = stripslashes($data);
+        $data = htmlspecialchars($data);
+        return $data;
     }
+
 
 ?>
 <html>
@@ -75,15 +63,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
             <div class="content">
                 <div class="page-title">Add a new Scripture</div>
-                <form action="week6Team.php" method="POST">
+                <form action="week6TeamAdd.php" method="POST">
                     <div>
-                        <div>Book <span class="error"><?=' - ' . $bookErr;?></span></div><div><input id='book' type="text" value="<?=$book?>"></div>
+                        <div>Book <span class="error"><?=' - ' . $bookErr;?></span></div><div><input id='book' type="text"></div>
                     </div>
                     <div>
-                        <div>Chapter <span class="error"><?=' - ' . $chapterErr;?></span></div><div><input id='chapter' type="text" value="<?=$chapter?>"></div>
+                        <div>Chapter</div><div><input id='chapter' type="text"></div>
                     </div>
                     <div>
-                        <div>Verse <span class="error"><?=' - ' . $verseErr;?></span></div><div><input id='verse' type="text" value="<?=$verse?>"></div>
+                        <div>Verse</div><div><input id='verse' type="text"></div>
                     </div>
                     <div>
                         <div>Content</div><div><textarea id='content' type="text" cols="50" rows="5"></textarea></div>
@@ -106,4 +94,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </div>
     </body>
 </html>
+
 
