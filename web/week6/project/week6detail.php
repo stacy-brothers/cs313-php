@@ -29,7 +29,9 @@ $notes = "";
 if ($_SERVER["REQUEST_METHOD"] == "GET") {
     // editing a topic
     $id = $_GET['id'];
+    error_log("doing GET");
 } else if ($_SERVER["REQUEST_METHOD"] == "POST") {  
+    error_log("doing POST");
     // updating a topic
     $id = $_POST['id'];
     if (empty($_POST["topic"])) {
