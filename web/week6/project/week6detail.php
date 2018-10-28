@@ -132,18 +132,7 @@ function fix_input($data) {
                                 }
                         ?>
                             <button onclick="addKeyword();">Add</button></div>
-                        <div>References:</div>
-                        <?php
-                                // get the reference urls...
-                                $refQuery = 'select url, descr from ref_url r where topic_id = :id';
-                                $refStmt = $db->prepare($refQuery);
-                                $refStmt->bindParam(':id', $id);
-                                $refStmt->execute();
-                                foreach( $refStmt->fetchAll() as $refRow ) {
-                        ?>
-                                <div><?=$refRow['descr']?> - <a href="<?=$refRow['url']?>"><?=$refRow['url']?></a></div>
                 <?php
-                                }
                             }
                     
                 ?>
@@ -153,7 +142,10 @@ function fix_input($data) {
             </div>
         </div>
         <script type="text/javascript">
-            addKeyword() {
+            function goBack() { 
+                window.location = 'week6.php';
+            }
+            function addKeyword() {
                 
             }
         </script>
