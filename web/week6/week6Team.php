@@ -70,6 +70,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         error_log( "Adding: " . $book . " " . $chapter . ":" . $verse);
         error_log( "Content: " . $content);
         error_log("Topics: " . $topics);
+        
+        // add the scripture
+        $insertSql = "insert into scripture ( book, chapter, verse, content ) values ( :book, :chapter, :verse, :content )";
+        try {
+            $stmt = $db->prepare($insertSql);
+            $stmt->execute($book, $chapter, $verse, $content);
+        } catch (PDOException $ex) {
+            echo "--------- Error adding scripture: " . $ex->getMessage();
+            $addError = "Error adding scripture: " . $ex->getMessage();
+            $good = FALSE;
+        }
+        
+        // add the s_t_xref 
+        
+        // if successful then go to the list
+        
     }
     
     function fix_input($data) {
@@ -95,6 +111,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
             <div class="content">
                 <div class="page-title">Add a new Scripture</div>
+                <div><span class="error"><?=$addErr?></span></div>
                 <form action="week6Team.php" method="POST">
                     <div>
                         <div>Book <span class="error"><?=' - ' . $bookErr;?></span></div><div><input name='book' id='book' type="text" value="<?=$book?>"></div>
@@ -113,7 +130,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <div>
                             <?php
                                 foreach ($db->query('SELECT id, name FROM script_topics') as $row) {
-                                    echo '<input type="checkbox" id="topics[]" value="' . $row['id'] . '" ' . ((isset($topics) && in_array($row['id'], $topics))?"checked":"") . '>' . $row['name'] . ' ';                    
+                                    echo '<input type="checkbox" name="topics[]" value="' . $row['id'] . '" ' . ((isset($topics) && in_array($row['id'], $topics))?"checked":"") . '>' . $row['name'] . ' ';                    
                                 }
                             ?>
                         </div>
