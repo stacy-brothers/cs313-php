@@ -105,9 +105,9 @@ function fix_input($data) {
                         $notes = $row['notes'];
                     }
                 ?>
-                <div class="page-title"><?=$topic?></div>
+                <form action="week6detail.php" method="POST">                    
+                <div class="page-title"><?=$topic?><button>save</button></div>
                 <div>
-                    <form action="week6detail.php">                    
                         <div>Topic</div><div><input type="text" name="topic" value="<?=$topic?>"><br></div>
                         <div>Notes</div><div><textarea name="notes" cols="80" rows="20"><?=$notes?></textarea><br></div>
                         <?php 
@@ -139,9 +139,9 @@ function fix_input($data) {
                             }
                     
                 ?>
-                        <br>
-                    </form>
+                        <br>                    
                 </div>
+                </form>
             </div>
         </div>
         <script type="text/javascript">
