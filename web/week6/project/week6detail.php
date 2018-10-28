@@ -46,6 +46,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
     }
     $notes = fix_input($_POST['notes']);
     if ( isset($id) ) {
+        error_log("updating an old topic");
         // updating an old topic
         $updateSql = "update topic set topic=:topic, notes=:notes where id=:id";
         try {
@@ -56,14 +57,17 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
             $good = FALSE;
         }
     } else {
+        error_log("adding a new topic");
         // adding a new topic
         $insertSql = "insert into topic (topic, notes) values (:topic,:notes)";
         try {
             $stmt = $db->prepare($insertSql);
             if ( $stmt->execute(array($topic,$notes)) === TRUE ) {
                 $id = $db->lastInsertId();                             
+                error_log("save was successful!");
             }
         } catch (PDOException $ex) {
+            error_log("error adding: " . $ex->getMessage());
             $addError = "Error updating topic: " . $ex->getMessage();
             $good = FALSE;
         }
