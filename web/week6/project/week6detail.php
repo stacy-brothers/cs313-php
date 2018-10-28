@@ -62,7 +62,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
                             error_log("-----------again:" . $row['id']);
                     ?>
                     <div>Topic</div><div><input type="text" name="topic" value="<?=$row['topic']?>"></div>
-                    <div>Notes</div><div><textarea name="notes" cols="50" rows="20"><?=$row['notes']?></textarea></div>
+                    <div>Notes</div><div><textarea name="notes" cols="80" rows="20"><?=$row['notes']?></textarea></div>
                             <div><br>Keywords:
                     <?php 
                             $keyQuery = 'select k.keyword from keyword k, topic_keyword tk where k.id = tk.keyword_id and tk.topic_id = :id';
