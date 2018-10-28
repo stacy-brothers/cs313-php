@@ -42,14 +42,15 @@
                     <div>
                         <?php
                             foreach ($db->query('select id, book, chapter, verse, content FROM scripture') as $row) {
-                                $topics = "Topics: ";
+                                $start = "Topics: ";
+                                $topics = "";
                                 $comma = "";
                                 $xrefQuery = "select s.name from script_topics s, s_t_xref x where s.id = x.topics_id and x.scripture_id = ?";
                                 $xrefStmt = $db->prepare($xrefQuery);
-                                $xrefRows = $xrefStmt->execute(array($row['id']));
-                                foreach ($xrefRows as $trow) {
-                                    $topics = $topics . $comma . $trow['name'];
+                                foreach($xrefStmt->execute(array($row['id'])) as $trow) {
+                                    $topics = $start . $topics . $comma . $trow['name'];
                                     $comma = ", ";
+                                    $start = "";
                                 }
                         ?>
                         <div>
