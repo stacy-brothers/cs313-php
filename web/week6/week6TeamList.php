@@ -56,7 +56,7 @@
                                 }
                         ?>
                         <div>
-                            <h3><b><?=$row['book'] . ' ' . $row['chapter'] . ':' . $row['verse']?></b></h3>&nbsp;&nbsp;&nbsp;<?=$topics?>
+                            <span style="font-size: larger; font-weight: bold"><?=$row['book'] . ' ' . $row['chapter'] . ':' . $row['verse']?></span>&nbsp;&nbsp;&nbsp;<?=$topics?>
                         </div>
                         <div><?=$row['content']?></div>
                         <div>&nbsp;</div>
