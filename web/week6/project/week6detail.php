@@ -22,14 +22,54 @@ catch (PDOException $ex)
   die();
 }
 
+$allEmpty = FALSE;
+
 if ($_SERVER["REQUEST_METHOD"] == "GET") {
     // editing a topic
     $id = $_GET['id'];
 } else if ($_SERVER["REQUEST_METHOD"] == "POST") {  
     // updating a topic
     $id = $_POST['id'];
+    if (empty($_POST["topic"])) {
+        $topicErr = "Topic is required";
+        $good = FALSE;
+    } else {
+        $topic = fix_input($_POST["topic"]);        
+    }
+    $notes = fix_input($_POST['notes']);
+    if ( isset($id) ) {
+        // updating an old topic
+        $updateSql = "update topic set topic=:topic, notes=:notes where id=:id";
+        try {
+            $stmt = $db->prepare($updateSql);
+            $stmt->execute(array($topic,$notes,$id));         
+        } catch (PDOException $ex) {
+            $addError = "Error updating topic: " . $ex->getMessage();
+            $good = FALSE;
+        }
+    } else {
+        // adding a new topic
+        $insertSql = "insert into topic (topic, notes) values (:topic,:notes)";
+        try {
+            $stmt = $db->prepare($insertSql);
+            if ( $stmt->execute(array($topic,$notes)) === TRUE ) {
+                $id = $db->lastInsertId();                             
+            }
+        } catch (PDOException $ex) {
+            $addError = "Error updating topic: " . $ex->getMessage();
+            $good = FALSE;
+        }
+    }
 } else { 
     // must be a new topic
+    $allEmpty = true;
+}
+
+function fix_input($data) {
+    $data = trim($data);
+    $data = stripslashes($data);
+    $data = htmlspecialchars($data);
+    return $data;
 }
 
 ?>
@@ -65,6 +105,9 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
                     <form action="week6detail.php">                    
                         <div>Topic</div><div><input type="text" name="topic" value="<?=$row['topic']?>"><br></div>
                         <div>Notes</div><div><textarea name="notes" cols="80" rows="20"><?=$row['notes']?></textarea><br></div>
+                        <?php 
+                            if ( !allEmpty ) {
+                        ?>
                         <div>Keywords:
                         <?php 
                                 $keyQuery = 'select k.keyword from keyword k, topic_keyword tk where k.id = tk.keyword_id and tk.topic_id = :id';
@@ -75,7 +118,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
                                     echo ' ' . $keyRow['keyword'];
                                 }
                         ?>
-                            <br></div>
+                            <button onclick="addKeyword();">Add</button></div>
                         <div>References:</div>
                         <?php
                                 // get the reference urls...
@@ -86,16 +129,20 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
                                 foreach( $refStmt->fetchAll() as $refRow ) {
                         ?>
                                 <div><?=$refRow['descr']?> - <a href="<?=$refRow['url']?>"><?=$refRow['url']?></a></div>
-                        <?php
+                <?php
                                 }
                             }
-                        ?>
+                    }
+                ?>
                         <br>
                     </form>
                 </div>
             </div>
         </div>
-
+        <script type="text/javascript">
+            addKeyword() {
+                
+            }
         </script>
     </body>
 </html>
