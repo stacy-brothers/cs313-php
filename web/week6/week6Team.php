@@ -25,6 +25,7 @@ catch (PDOException $ex)
 $book = $chapter = $verse = $content = "";
 $bookErr = $chapterErr = $verseError = $contentErr = "";
 $topics = [];
+$good = TRUE;
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
         error_log("Doing POST!");
