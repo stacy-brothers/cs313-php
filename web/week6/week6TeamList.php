@@ -48,7 +48,7 @@
                                 $xrefQuery = "select s.name from script_topics s, s_t_xref x where s.id = x.topics_id and x.scripture_id = ?";
                                 $xrefStmt = $db->prepare($xrefQuery);
                                 $xrefStmt->execute(array($row['id']));
-                                $rslt = $xrefStmt->get_result();
+                                $rslt = $xrefStmt->fetchAll();
                                 foreach ( $rslt as $trow) {
                                     $topics = $start . $topics . $comma . $trow['name'];
                                     $comma = ", ";
