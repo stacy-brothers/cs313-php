@@ -49,7 +49,17 @@ catch (PDOException $ex)
                         <div>Verse</div><div><input id='verse' type="text"></div>
                     </div>
                     <div>
-                        <div>content</div><div><textarea id='content' type="text" cols="50" rows="5"></textarea></div>
+                        <div>Content</div><div><textarea id='content' type="text" cols="50" rows="5"></textarea></div>
+                    </div>
+                    <div>
+                        <div>Topics</div>
+                        <div>
+                            <?php
+                                foreach ($db->query('SELECT id, name FROM script_topics') as $row) {
+                                    echo '<input type="checkbox" id="topics[]" value="' . $row['id'] . '">' . $row['name'] . ' ';                    
+                                }
+                            ?>
+                        </div>
                     </div>
                     <div>
                         <button>Add</button>
