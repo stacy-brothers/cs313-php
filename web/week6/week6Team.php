@@ -75,7 +75,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $insertSql = "insert into scripture ( book, chapter, verse, content ) values ( :book, :chapter, :verse, :content )";
         try {
             $stmt = $db->prepare($insertSql);
-            $stmt->execute($book, $chapter, $verse, $content);
+            $stmt->execute(array($book, $chapter, $verse, $content));
         } catch (PDOException $ex) {
             echo "--------- Error adding scripture: " . $ex->getMessage();
             $addError = "Error adding scripture: " . $ex->getMessage();
