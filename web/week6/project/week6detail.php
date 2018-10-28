@@ -27,6 +27,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
     $id = $_GET['id'];
 } else if ($_SERVER["REQUEST_METHOD"] == "POST") {  
     // updating a topic
+    $id = $_POST['id'];
 } else { 
     // must be a new topic
 }
@@ -46,47 +47,50 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
                 </div>
             </div>
             <div class="content">
-                <div class="page-title">Research Topics</div>
+                <?php
+                    if ( isset($id) ) {
+                        error_log("----------id: " . $id);
+                        // start with one of the keywords and then reduce the list by the others
+                        $query = 'select id, topic, researcher_id, notes from topic ';
+                        $query = $query . 'where id = :id';
+                        $stmt = $db->prepare($query);
+                        $stmt->bindParam(':id', $id);
+                        $stmt->execute();
+                        $stmt->setFetchMode(PDO::FETCH_ASSOC);
+                        $row = $stmt->fetch();
+                        error_log("-----------again:" . $row['id']);
+                ?>
+                <div class="page-title"><?=$row['topic']?></div>
                 <div>
-                    <?php
-                        if ( isset($id) ) {
-                            error_log("----------id: " . $id);
-                            // start with one of the keywords and then reduce the list by the others
-                            $query = 'select id, topic, researcher_id, notes from topic ';
-                            $query = $query . 'where id = :id';
-                            $stmt = $db->prepare($query);
-                            $stmt->bindParam(':id', $id);
-                            $stmt->execute();
-                            $stmt->setFetchMode(PDO::FETCH_ASSOC);
-                            $row = $stmt->fetch();
-                            error_log("-----------again:" . $row['id']);
-                    ?>
-                    <div>Topic</div><div><input type="text" name="topic" value="<?=$row['topic']?>"></div>
-                    <div>Notes</div><div><textarea name="notes" cols="80" rows="20"><?=$row['notes']?></textarea></div>
-                            <div><br>Keywords:
-                    <?php 
-                            $keyQuery = 'select k.keyword from keyword k, topic_keyword tk where k.id = tk.keyword_id and tk.topic_id = :id';
-                            $keyStmt = $db->prepare($keyQuery);
-                            $keyStmt->bindParam(':id', $id);
-                            $keyStmt->execute();
-                            foreach( $keyStmt->fetchAll() as $keyRow ) {
-                                echo ' ' . $keyRow['keyword'];
+                    <form action="week6detail.php">                    
+                        <div>Topic</div><div><input type="text" name="topic" value="<?=$row['topic']?>"></div>
+                        <div>Notes</div><div><textarea name="notes" cols="80" rows="20"><?=$row['notes']?></textarea></div>
+                        <div><br>Keywords:
+                        <?php 
+                                $keyQuery = 'select k.keyword from keyword k, topic_keyword tk where k.id = tk.keyword_id and tk.topic_id = :id';
+                                $keyStmt = $db->prepare($keyQuery);
+                                $keyStmt->bindParam(':id', $id);
+                                $keyStmt->execute();
+                                foreach( $keyStmt->fetchAll() as $keyRow ) {
+                                    echo ' ' . $keyRow['keyword'];
+                                }
+                        ?>
+                        </div>
+                        <div>References:</div>
+                        <?php
+                                // get the reference urls...
+                                $refQuery = 'select url, descr from ref_url r where topic_id = :id';
+                                $refStmt = $db->prepare($refQuery);
+                                $refStmt->bindParam(':id', $id);
+                                $refStmt->execute();
+                                foreach( $refStmt->fetchAll() as $refRow ) {
+                        ?>
+                                <div><?=$refRow['descr']?> - <a href="<?=$refRow['url']?>"><?=$refRow['url']?></a></div>
+                        <?php
+                                }
                             }
-                    ?>
-                            <div><br>References:</div>
-                    <?php
-                            // get the reference urls...
-                            $refQuery = 'select url, descr from ref_url r where topic_id = :id';
-                            $refStmt = $db->prepare($refQuery);
-                            $refStmt->bindParam(':id', $id);
-                            $refStmt->execute();
-                            foreach( $refStmt->fetchAll() as $refRow ) {
-                    ?>
-                            <div><?=$refRow['descr']?> - <a href="<?=$refRow['url']?>"><?=$refRow['url']?></a></div>
-                    <?php
-                            }
-                        }
-                    ?>
+                        ?>
+                    </form>
                 </div>
             </div>
         </div>
