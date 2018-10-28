@@ -62,6 +62,7 @@
                         <?php 
                             }
                         ?>
+                        <div>&nbsp;</div>
                     </div>
                     <div>
                         <button onclick="gotoAdd();">Add Another Scripture</button>
