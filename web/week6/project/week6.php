@@ -46,7 +46,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <div class="page-title">Research Topics<button onclick="addNew();">+</button></div>
                 <div style="overflow: auto">
                     <form method="post" id="keysForm" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
-                        <div>Search for <input type="text" name="searchStr"></div>
+                        <div>Search for <input type="text" name="searchStr" value="<?=$searchStr?>"></div>
                     <?php
                         foreach ($db->query('select id,keyword from keyword k order by keyword') as $row) {
                     ?>
