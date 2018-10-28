@@ -45,7 +45,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
         $topic = fix_input($_POST["topic"]);        
     }
     $notes = fix_input($_POST['notes']);
-    if ( isset($id) ) {
+    if ( isset($id) && $id!=='' ) {
         error_log("updating an old topic");
         // updating an old topic
         $updateSql = "update topic set topic=:topic, notes=:notes where id=:id";
