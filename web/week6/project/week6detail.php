@@ -27,8 +27,12 @@ $topic = "New Topic";
 $notes = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "GET") {
-    // editing a topic
+    // editing or adding a new topic
     $id = $_GET['id'];
+    if ( !isset($id) ) {
+         // must be a new topic
+        $allEmpty = TRUE;
+    }
     error_log("doing GET");
 } else if ($_SERVER["REQUEST_METHOD"] == "POST") {  
     error_log("doing POST");
@@ -64,9 +68,6 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
             $good = FALSE;
         }
     }
-} else { 
-    // must be a new topic
-    $allEmpty = TRUE;
 }
 
 function fix_input($data) {
