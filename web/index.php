@@ -9,7 +9,8 @@
         "Week 4 - Project DB", 
         "Week 5 Team - Scripture DB",
         "Week 5 - Project DB query screens",
-        "Week 6 Team - Add a scripture"
+        "Week 6 Team - Add a scripture",
+        "Week 6 - Project add data"
     );
     
     $url = array(
@@ -22,7 +23,8 @@
         "sql/researchDB.sql",
         "week5/week5Team.php",
         "week5/week5.php",
-        "week6/week6Team.php"
+        "week6/week6Team.php",
+        "week6/project/week6.php"
     );
     
     $notes = array(
@@ -35,7 +37,8 @@
         "SQL for term project. <a href='https://github.com/stacy-brothers/cs313-php/blob/master/web/sql/researchDB.sql'>Github</a>",
         "Listing of values from scripture postgres DB. <a href='https://github.com/stacy-brothers/cs313-php/blob/master/web/week5'>Github</a>",
         "Start of term project.  Search and detail screen.  <a href='https://github.com/stacy-brothers/cs313-php/blob/master/web/week5'>Github</a>",
-        "Adding a scripture and topics to our team project. <a href='https://github.com/stacy-brothers/cs313-php/blob/master/web/week6'>Github</a>"
+        "Adding a scripture and topics to our team project. <a href='https://github.com/stacy-brothers/cs313-php/blob/master/web/week6'>Github</a>",
+        "Adding the ability to add and edit on our project. <a href='https://github.com/stacy-brothers/cs313-php/blob/master/web/week6/project'>Github</a>"
     );
 
 ?>
