@@ -23,6 +23,8 @@ catch (PDOException $ex)
 }
 
 $allEmpty = FALSE;
+$topic = "New Topic";
+$notes = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "GET") {
     // editing a topic
@@ -87,7 +89,7 @@ function fix_input($data) {
                 </div>
             </div>
             <div class="content">
-                <?php
+                <?php                    
                     if ( isset($id) ) {
                         error_log("----------id: " . $id);
                         // start with one of the keywords and then reduce the list by the others
@@ -99,12 +101,15 @@ function fix_input($data) {
                         $stmt->setFetchMode(PDO::FETCH_ASSOC);
                         $row = $stmt->fetch();
                         error_log("-----------again:" . $row['id']);
+                        $topic = $row['topic'];
+                        $notes = $row['notes'];
+                    }
                 ?>
-                <div class="page-title"><?=$row['topic']?></div>
+                <div class="page-title"><?=$topic?></div>
                 <div>
                     <form action="week6detail.php">                    
-                        <div>Topic</div><div><input type="text" name="topic" value="<?=$row['topic']?>"><br></div>
-                        <div>Notes</div><div><textarea name="notes" cols="80" rows="20"><?=$row['notes']?></textarea><br></div>
+                        <div>Topic</div><div><input type="text" name="topic" value="<?=$topic?>"><br></div>
+                        <div>Notes</div><div><textarea name="notes" cols="80" rows="20"><?=$notes?></textarea><br></div>
                         <?php 
                             if ( !allEmpty ) {
                         ?>
@@ -132,7 +137,7 @@ function fix_input($data) {
                 <?php
                                 }
                             }
-                    }
+                    
                 ?>
                         <br>
                     </form>
