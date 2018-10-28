@@ -90,9 +90,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $good = FALSE;
         }
         
-        
-        
         // if successful then go to the list
+        if ( $good === TRUE ) { 
+            header('Location: week6TeamList.php', true, 303);
+            die();
+        }
         
     }
     

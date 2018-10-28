@@ -22,30 +22,6 @@
       die();
     }
     
-    $book = "";
-
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        error_log("Doing POST!");
-        if (empty($_POST["book"])) {
-            $bookErr = "Book is required";
-            $good = FALSE;
-        } else {
-            $book = fix_input($_POST["book"]);
-            // check if book only contains number, letters and whitespace
-            if (!preg_match("/^[0-9a-zA-Z ]*$/",$book)) {
-                $bookErr = "Only numbers, letters and white space allowed";
-                $good = FALSE;
-            }
-        }
-    } 
-    
-    function fix_input($data) {
-        $data = trim($data);
-        $data = stripslashes($data);
-        $data = htmlspecialchars($data);
-        return $data;
-    }
-
 
 ?>
 <html>
@@ -62,29 +38,24 @@
                 </div>
             </div>
             <div class="content">
-                <div class="page-title">Add a new Scripture</div>
-                <form action="week6TeamAdd.php" method="POST">
+                <div class="page-title">Scripture List</div>
                     <div>
-                        <div>Book <span class="error"><?=' - ' . $bookErr;?></span></div><div><input id='book' type="text"></div>
-                    </div>
-                    <div>
-                        <div>Chapter</div><div><input id='chapter' type="text"></div>
-                    </div>
-                    <div>
-                        <div>Verse</div><div><input id='verse' type="text"></div>
-                    </div>
-                    <div>
-                        <div>Content</div><div><textarea id='content' type="text" cols="50" rows="5"></textarea></div>
-                    </div>
-                    <div>
-                        <div>Topics</div>
-                        <div>
-                            <?php
-                                foreach ($db->query('SELECT id, name FROM script_topics') as $row) {
-                                    echo '<input type="checkbox" id="topics[]" value="' . $row['id'] . '">' . $row['name'] . ' ';                    
+                        <?php
+                            foreach ($db->query('select book, chapter, verse, content FROM scripture') as $row) {
+                                $topics = "Topics: ";
+                                $comma = "";
+                                foreach ($db->query('SELECT id, name FROM script_topics') as $trow) {
+                                    $topics = $topics . $comma . $trow['name'];
+                                    $comma = ", ";
                                 }
-                            ?>
+                        ?>
+                        <div>
+                            <b><?=$row['book'] . ' ' . $row['chapter'] . ':' . $row['verse']?></b>&nbsp;&nbsp;&nbsp;<?=$topics?>
                         </div>
+                        <div><?=$row['content']?></div>
+                        <?php 
+                            }
+                        ?>
                     </div>
                     <div>
                         <button>Add</button>
