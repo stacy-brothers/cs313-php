@@ -22,6 +22,9 @@ catch (PDOException $ex)
   die();
 }
 
+$book = $chapter = $verse = "";
+$bookErr = $chapterErr = $verseError = "";
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
         error_log("Doing POST!");
         if (empty($_POST["book"])) {
@@ -29,34 +32,33 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $good = FALSE;
         } else {
             $book = test_input($_POST["book"]);
-            // check if name only contains numbers, letters and whitespace
             if (!preg_match("/^[0-9a-zA-Z ]*$/",$book)) {
                 $bookErr = "Only numbers, letters and white space allowed";
                 $good = FALSE;
             }
         }
         if (empty($_POST["chapter"])) {
-            $chapterErr = "Book is required";
+            $chapterErr = "Chapter is required";
             $good = FALSE;
         } else {
             $chapter = test_input($_POST["chapter"]);
-            // check if name only contains numbers, letters and whitespace
-            if (!preg_match("/^[0-9a-zA-Z ]*$/",$chapter)) {
-                $chapterErr = "Only numbers, letters and white space allowed";
+            if (!preg_match("/^[0-9]*$/",$chapter)) {
+                $chapterErr = "Only numbers allowed";
                 $good = FALSE;
             }
         }
         if (empty($_POST["verse"])) {
-            $verseErr = "Book is required";
+            $verseErr = "Verse is required";
             $good = FALSE;
         } else {
             $verse = test_input($_POST["verse"]);
-            // check if name only contains numbers, letters and whitespace
-            if (!preg_match("/^[0-9a-zA-Z ]*$/",$verse)) {
-                $verseErr = "Only numbers, letters and white space allowed";
+            if (!preg_match("/^[0-9]*$/",$verse)) {
+                $verseErr = "Only numbers allowed";
                 $good = FALSE;
             }
         }
+        
+        error_log( "Adding: " . $book . " " . $chapter . ":" . $verse);
     }
 
 ?>
