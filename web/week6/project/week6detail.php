@@ -23,7 +23,12 @@ catch (PDOException $ex)
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "GET") {
+    // editing a topic
     $id = $_GET['id'];
+} else if ($_SERVER["REQUEST_METHOD"] == "POST") {  
+    // updating a topic
+} else { 
+    // must be a new topic
 }
 
 ?>
@@ -56,8 +61,8 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
                             $row = $stmt->fetch();
                             error_log("-----------again:" . $row['id']);
                     ?>
-                            <div>Topic: <?=$row['topic']?></div>
-                            <div><br>Notes:<?=$row['notes']?><br></div>
+                    <div>Topic</div><div><input type="text" name="topic" value="<?=$row['topic']?>"></div>
+                    <div>Notes</div><div><textarea name="notes" cols="50" rows="20"><?=$row['notes']?></div>
                             <div><br>Keywords:
                     <?php 
                             $keyQuery = 'select k.keyword from keyword k, topic_keyword tk where k.id = tk.keyword_id and tk.topic_id = :id';
