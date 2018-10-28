@@ -91,6 +91,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
         
         // if successful then go to the list
+        error_log("did it work: " .  $good );
         if ( $good ) { 
             error_log("It worked!");
             header('Location: week6TeamList.php', true, 303);
