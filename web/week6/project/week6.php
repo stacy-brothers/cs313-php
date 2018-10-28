@@ -99,7 +99,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             }
             
             function gotoTopic(id){
-                window.location.href = 'week5detail.php?id=' + id;
+                window.location.href = 'week6detail.php?id=' + id;
             }
         </script>
     </body>
