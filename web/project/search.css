@@ -1,5 +1,5 @@
 .page-body {
-    height: available;
+    height: content-box;
 }
 
 .search-bar {
@@ -11,7 +11,7 @@
 }
 
 .search-results {
-    width: 80%;
+    width: 79%;
     background-color: #dddddd;
     float: left;
     border: 1px solid black;
