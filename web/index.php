@@ -11,7 +11,8 @@
         "Week 5 - Project DB query screens",
         "Week 6 Team - Add a scripture",
         "Week 6 - Project add data",
-        "Week 7 Team - Login screen"
+        "Week 7 Team - Login screen",
+        "Completed Project"
     );
     
     $url = array(
@@ -26,7 +27,8 @@
         "week5/week5.php",
         "week6/week6Team.php",
         "week6/project/week6.php",
-        "week7/week7TeamLogin.php"
+        "week7/week7TeamLogin.php",
+        "project/search.php"
     );
     
     $notes = array(
@@ -41,7 +43,8 @@
         "Start of term project.  Search and detail screen.  <a href='https://github.com/stacy-brothers/cs313-php/blob/master/web/week5'>Github</a>",
         "Adding a scripture and topics to our team project. <a href='https://github.com/stacy-brothers/cs313-php/blob/master/web/week6'>Github</a>",
         "Adding the ability to add and edit on our project. <a href='https://github.com/stacy-brothers/cs313-php/blob/master/web/week6/project'>Github</a>",
-        "Example of a login screen. <a href='https://github.com/stacy-brothers/cs313-php/blob/master/web/week7'>Github</a>"
+        "Example of a login screen. <a href='https://github.com/stacy-brothers/cs313-php/blob/master/web/week7'>Github</a>",
+        "Final version of the first project. <a href='https://github.com/stacy-brothers/cs313-php/blob/master/web/project'>Github</a>"
     );
 
 ?>
