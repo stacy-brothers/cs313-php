@@ -44,7 +44,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
             <div class="content">
                 <div class="page-title">Research Topics<button onclick="addNew();">+</button></div>
-                <div style="overflow: auto">
+                <div class="search-bar" >
                     <form method="post" id="keysForm" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
                         <div>Search for <input type="text" name="searchStr" value="<?=$searchStr?>"></div>
                     <?php
@@ -116,10 +116,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             }
             
             function gotoTopic(id){
-                window.location.href = 'week6detail.php?id=' + id;
+                window.location.href = 'detail.php?id=' + id;
             }
             function addNew() {
-                window.location.href = 'week6detail.php';
+                window.location.href = 'detail.php';
             }
         </script>
     </body>
