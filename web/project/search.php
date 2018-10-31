@@ -43,7 +43,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </div>
             </div>
             <div class="content">
-                <div class="page-title">Research Topics<button onclick="addNew();">+</button></div>
+                <div class="page-title">Research Topics</div>
                 <div class="page-body">
                     <div class="search-bar" >
                         <form method="post" id="keysForm" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
@@ -70,7 +70,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             if ( (isset($keywords) && count($keywords) > 0) || isset($searchStr)) {
                                 error_log("----------keywords[0]: " . $keywords[0]);
                                 // start with one of the keywords and then reduce the list by the others
-                                $query = 'select t.id, t.topic, t.researcher_id, t.notes from topic t, topic_keyword tk';
+                                $query = 'select t.id, t.topic, t.notes from topic t, topic_keyword tk';
                                 $word = ' where '; 
                                 if (isset($keywords) && count($keywords) > 0) {
                                     $query = $query . $word . 't.id = tk.topic_id and tk.keyword_id = :kw';
@@ -111,7 +111,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                                 foreach ($topics as $topic) {
                                     error_log($topic['topic']);
-                                    echo "<div class='search-results-row' onclick='gotoTopic(" . $topic['id'] . ");'>" . $topic['topic'] . "<i class='fas fa-chevron-right'></i></div>";
+                                    echo "<div class='search-results-row' onclick='gotoTopic(" . $topic['id'] . ");'><b>" . $topic['topic'] . "</b> - " . $topic['notes'] . "<span style='float:right'><i class='fas fa-chevron-right'></i></span></div>";
                                 }
                             }
                         ?>
