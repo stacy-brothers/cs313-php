@@ -73,7 +73,9 @@
     
     .search-results-row {
         height: 30px;
-        font-size: 20px;
+        font-size: 17px;
         border-bottom: 1px solid black;
+        padding: 6px 0px 0px 10px;
+        background-color: #adec8d;
     }
 
