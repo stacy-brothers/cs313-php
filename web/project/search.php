@@ -111,7 +111,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                                 foreach ($topics as $topic) {
                                     error_log($topic['topic']);
-                                    echo "<div class='search-results-row' onclick='gotoTopic(" . $topic['id'] . ");'>" . $topic['topic'] . "</div>";
+                                    echo "<div class='search-results-row' onclick='gotoTopic(" . $topic['id'] . ");'>" . $topic['topic'] . "<i class='fas fa-chevron-right'></i></div>";
                                 }
                             }
                         ?>
