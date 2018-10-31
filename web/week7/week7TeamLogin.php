@@ -24,6 +24,7 @@ catch (PDOException $ex)
 
 $user = $pass = "";
 $userError = $passError = "";
+$good = TRUE;
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {  
     error_log("doing POST");
@@ -50,7 +51,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $stmt = $db->prepare($query);
             if ($stmt->execute(array($user,$hash))) {
                 error_log("success!");
-                header('Location: ./week7Team.php');
+                session_start();
+                $_SESSION['user'] = user;
+                header('Location: ./week7TeamFinish.php');
                 die();
             } else { 
                 error_log("fail!");
