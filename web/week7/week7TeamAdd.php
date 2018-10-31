@@ -46,11 +46,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $hash = password_hash($password, PASSWORD_DEFAULT);
         $query = "insert into users (name, pass) values (:name, :pass)";
         try {
+            error_log("starting add");
             $stmt = $db->prepare($query);
             if ($stmt->execute(array($user,$hash))) {
+                error_log("Add success!");
                 header('Location: ./week7TeamLogin.php');
                 die();
             } else { 
+                error_log("add fail!");
                 $loginErr = "There was a problem logging in.  Check you user and pass and try again...";
             }
         } catch (PDOException $ex) {
