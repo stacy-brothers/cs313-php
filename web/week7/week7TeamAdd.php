@@ -24,6 +24,7 @@ catch (PDOException $ex)
 
 $user = $pass = "";
 $userError = $passError = "";
+$good = TRUE;
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {  
     error_log("doing POST");
