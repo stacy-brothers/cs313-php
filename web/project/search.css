@@ -3,6 +3,7 @@
 }
 
 .search-bar {
+    flex: 1 1 auto;
     overflow: auto;
     width: 20%;
     background-color: #ccffcc;
@@ -30,8 +31,11 @@
 
 .page-title { 
     padding-bottom: 0px;
+    flex: 0 1 auto;
 }
 
 .content {
-    display: inline-block;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
 }
