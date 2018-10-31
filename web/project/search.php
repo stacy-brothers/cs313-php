@@ -65,7 +65,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         </form>
                     </div>
                     <div class="search-results">
-                        <div class="search-results-header">Topics<div style="float: right"><button onclick="addNew();">Add a New Topic</button></div></div>
+                        <div class="search-results-header">Topics<div class="search-results-header-buttons" ><button onclick="addNew();">Add a New Topic</button></div></div>
                         <?php
                             if ( (isset($keywords) && count($keywords) > 0) || isset($searchStr)) {
                                 error_log("----------keywords[0]: " . $keywords[0]);
@@ -111,7 +111,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                                 foreach ($topics as $topic) {
                                     error_log($topic['topic']);
-                                    echo "<div onclick='gotoTopic(" . $topic['id'] . ");'>" . $topic['topic'] . "</div>";
+                                    echo "<div class='search-results-row' onclick='gotoTopic(" . $topic['id'] . ");'>" . $topic['topic'] . "</div>";
                                 }
                             }
                         ?>
