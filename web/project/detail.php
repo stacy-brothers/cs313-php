@@ -144,7 +144,7 @@ function fix_input($data) {
         </div>
         <script type="text/javascript">
             function goBack() { 
-                window.location = 'week6.php';
+                window.location = 'search.php';
             }
             function addKeyword() {
                 
