@@ -112,7 +112,7 @@ function fix_input($data) {
                         $notes = $row['notes'];
                     }
                 ?>
-                <div class="page-title"><span><span onclick="goBack();" style='float:left'><i class='fas fa-chevron-left'></i></span><?=$topic?></div>
+                <div class="page-title"><span><span onclick="goBack();" style='float:left;'><i class='fas fa-chevron-left'></i></span><?=$topic?></div>
                 <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST">                    
                 <input type="hidden" name="id" value="<?=$id?>">
                 <div>
@@ -134,8 +134,7 @@ function fix_input($data) {
                         ?>
                             <button onclick="addKeyword();">+</button></div>
                 <?php
-                            }
-                    
+                            }                    
                 ?>
                         <br>                    
                 </div>
