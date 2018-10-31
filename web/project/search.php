@@ -65,6 +65,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         </form>
                     </div>
                     <div class="search-results">
+                        <div class="search-results-header">Topics<div style="float: right"><button onclick="addNew();">Add a New Topic</button></div></div>
                         <?php
                             if ( (isset($keywords) && count($keywords) > 0) || isset($searchStr)) {
                                 error_log("----------keywords[0]: " . $keywords[0]);

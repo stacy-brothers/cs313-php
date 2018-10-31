@@ -53,6 +53,17 @@
         float: left;
         border: 1px solid black;
     }
+    
+    .search-results-header {
+        background-color: darkgreen;
+            color: white;
+            height: 30px;
+            font-size: 25px;
+            border: 1px solid black;
+            border-bottom: 3px solid black;
+            padding-right: 0px;
+            padding-left: 10;
+    }
 
 
 
