@@ -44,70 +44,72 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
             <div class="content">
                 <div class="page-title">Research Topics<button onclick="addNew();">+</button></div>
-                <div class="search-bar" >
-                    <div class="search-bar-header">Search</div>
-                    <form method="post" id="keysForm" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
-                        <div>Search notes for</div><div><input type="text" name="searchStr" value="<?=$searchStr?>"></div>
-                    <?php
-                        foreach ($db->query('select id,keyword from keyword k order by keyword') as $row) {
-                    ?>
-                        <div><input type="checkbox" name="keywords[]" value="<?=$row['id']?>" onclick="didCheckBox();" <?php if (isset($keywords) && in_array($row['id'], $keywords)) echo "checked";?>/><?=$row['keyword']?></div>
-                    <?php
-                        }
-                    ?>
-                        <div><button>Search</button></div>
-                    </form>
-                </div>
-                <div class="search-results">
-                    <?php
-                        if ( (isset($keywords) && count($keywords) > 0) || isset($searchStr)) {
-                            error_log("----------keywords[0]: " . $keywords[0]);
-                            // start with one of the keywords and then reduce the list by the others
-                            $query = 'select t.id, t.topic, t.researcher_id, t.notes from topic t, topic_keyword tk';
-                            $word = ' where '; 
-                            if (isset($keywords) && count($keywords) > 0) {
-                                $query = $query . $word . 't.id = tk.topic_id and tk.keyword_id = :kw';
-                                $word = ' and ';
+                <div class="page-body">
+                    <div class="search-bar" >
+                        <div class="search-bar-header">Search</div>
+                        <form method="post" id="keysForm" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+                            <div>Search notes for</div><div><input type="text" name="searchStr" value="<?=$searchStr?>"></div>
+                        <?php
+                            foreach ($db->query('select id,keyword from keyword k order by keyword') as $row) {
+                        ?>
+                            <div><input type="checkbox" name="keywords[]" value="<?=$row['id']?>" onclick="didCheckBox();" <?php if (isset($keywords) && in_array($row['id'], $keywords)) echo "checked";?>/><?=$row['keyword']?></div>
+                        <?php
                             }
-                            if ( isset($searchStr) && $searchStr!=='') {
-                                error_log("searchStr is set: " . $searchStr);
-                                $searchStr = "%" . $searchStr . "%";
-                                $query = $query . $word . " ( t.topic like :searchStr or t.notes like :searchStr )";
-                            }
-                            $stmt = $db->prepare($query);
-                            if (isset($keywords) && count($keywords) > 0) {
-                                $stmt->bindParam(':kw', $keywords[0]);
-                            }
-                            if ( isset($searchStr) && $searchStr!=='') {
-                                $stmt->bindParam(":searchStr", $searchStr);
-                            }
-                            $stmt->execute();
-                            $topics = array();
-                            $rslt = $stmt->setFetchMode(PDO::FETCH_ASSOC);
-                            while ( $row = $stmt->fetch() ) { 
-                                $topics[$row['id']] = $row;
-                            }
-                            
-                            for ( $x = 1; $x < count($keywords); $x++ ) {
-                                
-                                $stmt->bindParam(':kw', $keywords[$x]);
-                                $stmt->execute();
-                                
-                                $newTopics = array();
-                                while ( $row = $stmt->fetch() ) { 
-                                    if ( isset($topics[$row['id']]) ) {
-                                        $newTopics[$row['id']] = $row;
-                                    }
+                        ?>
+                            <div><button>Search</button></div>
+                        </form>
+                    </div>
+                    <div class="search-results">
+                        <?php
+                            if ( (isset($keywords) && count($keywords) > 0) || isset($searchStr)) {
+                                error_log("----------keywords[0]: " . $keywords[0]);
+                                // start with one of the keywords and then reduce the list by the others
+                                $query = 'select t.id, t.topic, t.researcher_id, t.notes from topic t, topic_keyword tk';
+                                $word = ' where '; 
+                                if (isset($keywords) && count($keywords) > 0) {
+                                    $query = $query . $word . 't.id = tk.topic_id and tk.keyword_id = :kw';
+                                    $word = ' and ';
                                 }
-                                $topics = $newTopics;
+                                if ( isset($searchStr) && $searchStr!=='') {
+                                    error_log("searchStr is set: " . $searchStr);
+                                    $searchStr = "%" . $searchStr . "%";
+                                    $query = $query . $word . " ( t.topic like :searchStr or t.notes like :searchStr )";
+                                }
+                                $stmt = $db->prepare($query);
+                                if (isset($keywords) && count($keywords) > 0) {
+                                    $stmt->bindParam(':kw', $keywords[0]);
+                                }
+                                if ( isset($searchStr) && $searchStr!=='') {
+                                    $stmt->bindParam(":searchStr", $searchStr);
+                                }
+                                $stmt->execute();
+                                $topics = array();
+                                $rslt = $stmt->setFetchMode(PDO::FETCH_ASSOC);
+                                while ( $row = $stmt->fetch() ) { 
+                                    $topics[$row['id']] = $row;
+                                }
+
+                                for ( $x = 1; $x < count($keywords); $x++ ) {
+
+                                    $stmt->bindParam(':kw', $keywords[$x]);
+                                    $stmt->execute();
+
+                                    $newTopics = array();
+                                    while ( $row = $stmt->fetch() ) { 
+                                        if ( isset($topics[$row['id']]) ) {
+                                            $newTopics[$row['id']] = $row;
+                                        }
+                                    }
+                                    $topics = $newTopics;
+                                }
+
+                                foreach ($topics as $topic) {
+                                    error_log($topic['topic']);
+                                    echo "<div onclick='gotoTopic(" . $topic['id'] . ");'>" . $topic['topic'] . "</div>";
+                                }
                             }
-                                                        
-                            foreach ($topics as $topic) {
-                                error_log($topic['topic']);
-                                echo "<div onclick='gotoTopic(" . $topic['id'] . ");'>" . $topic['topic'] . "</div>";
-                            }
-                        }
-                    ?>
+                        ?>
+                    </div>
                 </div>
             </div>
         </div>
