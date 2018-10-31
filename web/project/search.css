@@ -1,14 +1,14 @@
 .search-bar {
     overflow: auto;
     width: 20%;
-    background-color: #dddddd;
+    background-color: #ccffcc;
     float: left;
     border: 1px solid black;
 }
 
 .search-results {
-    width: 20%;
-    background-color: #ccffcc;
+    width: 80%;
+    background-color: #dddddd;
     float: left;
     border: 1px solid black;
 }
