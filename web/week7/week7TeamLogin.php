@@ -46,11 +46,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $hash = password_hash($password, PASSWORD_DEFAULT);
         $query = "select id, name, pass from users where name = :name and pass = :hash";
         try {
+            error_log("starting the query");
             $stmt = $db->prepare($query);
             if ($stmt->execute(array($user,$hash))) {
+                error_log("success!");
                 header('Location: ./week7Team.php');
                 die();
             } else { 
+                error_log("fail!");
                 $loginErr = "There was a problem logging in.  Check you user and pass and try again...";
             }
         } catch (PDOException $ex) {
