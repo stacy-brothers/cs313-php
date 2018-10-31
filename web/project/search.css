@@ -67,12 +67,13 @@
     
     .search-results-header-buttons {
         padding-right: 30px;
-        vertical-align: central;
         float: right;
+        padding-top: 4px;
     }
     
     .search-results-row {
         height: 30px;
         font-size: 20px;
+        border-bottom: 1px solid black;
     }
 
