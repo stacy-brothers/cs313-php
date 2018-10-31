@@ -52,7 +52,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if ($stmt->execute(array($user,$hash))) {
                 error_log("success!");
                 session_start();
-                $_SESSION['user'] = user;
+                $_SESSION['user'] = $user;
                 header('Location: ./weekTeamFinish.php');
                 die();
             } else { 
