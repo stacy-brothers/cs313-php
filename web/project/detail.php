@@ -112,8 +112,8 @@ function fix_input($data) {
                         $notes = $row['notes'];
                     }
                 ?>
-                <div class="page-title"><button onclick="goBack();"><</button><?=$topic?></div>
-                <form action="week6detail.php" method="POST">                    
+                <div class="page-title"><span><span onclick="goBack();" style='float:left'><i class='fas fa-chevron-left'></i></span><?=$topic?></div>
+                <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST">                    
                 <input type="hidden" name="id" value="<?=$id?>">
                 <div>
                         <div>Topic</div><div><input type="text" name="topic" value="<?=$topic?>"><br></div>
@@ -121,7 +121,7 @@ function fix_input($data) {
                         <?php 
                             if ( !$allEmpty ) {
                         ?>
-                        <div><button>save</button></div>
+                        <div><button>SAVE</button></div>
                         <div>Keywords:
                         <?php 
                                 $keyQuery = 'select k.keyword from keyword k, topic_keyword tk where k.id = tk.keyword_id and tk.topic_id = :id';
@@ -132,7 +132,7 @@ function fix_input($data) {
                                     echo ' ' . $keyRow['keyword'];
                                 }
                         ?>
-                            <button onclick="addKeyword();">Add</button></div>
+                            <button onclick="addKeyword();">+</button></div>
                 <?php
                             }
                     
