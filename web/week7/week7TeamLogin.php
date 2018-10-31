@@ -53,7 +53,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 error_log("success!");
                 session_start();
                 $_SESSION['user'] = user;
-                header('Location: ./week7TeamFinish.php');
+                header('Location: ./weekTeamFinish.php');
                 die();
             } else { 
                 error_log("fail!");
