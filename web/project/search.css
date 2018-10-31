@@ -38,6 +38,10 @@
         .search-bar-part {
             flex: 0 1 auto;
         }
+        
+        .search-bar-part div {
+            padding: 5px;
+        }
 
         .search-bar-rest {
             flex: 1 1 auto;
