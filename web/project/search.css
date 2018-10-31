@@ -1,24 +1,29 @@
+.content {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.page-title { 
+    padding-bottom: 0px;
+    flex: 0 1 auto;
+}
+
 .page-body {
-    height: content-box;
     flex: 1 1 auto;
 }
 
 .search-bar {
-    overflow: auto;
+    display: flex;
+    flex-direction: column;
     width: 20%;
     background-color: #ccffcc;
     float: left;
     border: 1px solid black;
 }
 
-.search-results {
-    width: 79%;
-    background-color: #dddddd;
-    float: left;
-    border: 1px solid black;
-}
-
 .search-bar-header {
+    flex: 0 1 auto;
     background-color: darkgreen;
     color: white;
     height: 30px;
@@ -29,13 +34,21 @@
     padding-left: 10;
 }
 
-.page-title { 
-    padding-bottom: 0px;
+.search-bar-part {
     flex: 0 1 auto;
 }
 
-.content {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
+.search-bar-rest {
+    flex: 1 1 auto;
 }
+
+.search-results {
+    width: 79%;
+    background-color: #dddddd;
+    float: left;
+    border: 1px solid black;
+}
+
+
+
+

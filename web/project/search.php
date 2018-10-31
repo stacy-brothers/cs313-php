@@ -48,8 +48,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <div class="search-bar" >
                         <form method="post" id="keysForm" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
                         <div class="search-bar-header">Search</div>
-                        <div><button>Search</button></div>
+                        <div class="search-bar-part">
                             <div>Search notes for</div><div><input type="text" name="searchStr" value="<?=$searchStr?>"></div>
+                            <div><button>Search</button></div>
+                        </div>
+                        <div class="search-bar-header">Keywords</div>
+                        <div class="search-bar-rest">
                         <?php
                             foreach ($db->query('select id,keyword from keyword k order by keyword') as $row) {
                         ?>
@@ -57,6 +61,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <?php
                             }
                         ?>
+                        </div>
                         </form>
                     </div>
                     <div class="search-results">
