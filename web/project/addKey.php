@@ -93,23 +93,31 @@ function fix_input($data) {
                         <?php 
                             if ( !$allEmpty ) {
                         ?>
-                        <div class="label-row">Keywords:
+                        <div class="label-row">Keywords<button class="save-btn">SAVE</button></div>
+                        <div class="key-list">
                         <?php 
                                 $keyQuery = 'select k.id, k.keyword from keyword k, topic_keyword tk where k.id = tk.keyword_id and tk.topic_id = :id';
                                 $keyStmt = $db->prepare($keyQuery);
                                 $keyStmt->bindParam(':id', $id);
                                 $keyStmt->execute();
                                 $comma="  ";
-                                $keywordList = [];
+                                $keywordIds = array();
                                 foreach( $keyStmt->fetchAll() as $keyRow ) {
-                                    echo $comma . $keyRow['keyword'];
-                                    $comma = ", ";                                    
+                                    $keywordIds = array_push($keywordIds,$keyRow['id']);                                    
+                                }
+                                print_r($keywordsIds);
+                                $allQuery = " select id, keyword from keyword";
+                                foreach ($db->query($allQuery) as $key) {
+                        ?>
+                            <div class="key-item"><input type="checkbox" name="keywords[]" <?php if (isset($keywordIds) && in_array($key['id'], $keywordIds)) echo "checked";?>><?=$key['keyword']?></div>
+                        <?php
                                 }
                         ?>
-                        <button class="save-btn">SAVE</button></div>
+                        
                 <?php
                             }                    
                 ?>
+                        </div>
                         <br>                    
                 </div>
                 <input type="hidden" name="addKeys" id="addKeys">
@@ -118,7 +126,7 @@ function fix_input($data) {
         </div>
         <script type="text/javascript">
             function goBack() { 
-                window.location = 'search.php';
+                window.location = 'detail.php?id=<?=$id?>';
             }
             function addKeyword() {
                 document.getElementById("addKeys").value = "TRUE";
