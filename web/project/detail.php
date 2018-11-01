@@ -117,10 +117,12 @@ function fix_input($data) {
                 <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST">                    
                 <input type="hidden" name="id" value="<?=$id?>">
                 <div>
+                    <div class="spacer"></div>
                     <div class="label-row">Topic:<span class="topic-input"><input type="text" name="topic" value="<?=$topic?>"></span><button class="save-btn">SAVE</button></div>
                     <div class="spacer"></div>
                     <div class="label-row">Notes</div>
                     <div><textarea name="notes" style="width: 100%" rows="20"><?=$notes?></textarea><br></div>
+                    <div class="spacer"></div>
                         <?php 
                             if ( !$allEmpty ) {
                         ?>
@@ -130,11 +132,13 @@ function fix_input($data) {
                                 $keyStmt = $db->prepare($keyQuery);
                                 $keyStmt->bindParam(':id', $id);
                                 $keyStmt->execute();
+                                $comma="";
                                 foreach( $keyStmt->fetchAll() as $keyRow ) {
-                                    echo ' ' . $keyRow['keyword'];
+                                    echo ' ' . $comma . $keyRow['keyword'];
+                                    $comma = ", ";
                                 }
                         ?>
-                            <button onclick="addKeyword();">+</button></div>
+                            <button class="save-btn" onclick="addKeyword();">+</button></div>
                 <?php
                             }                    
                 ?>
