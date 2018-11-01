@@ -105,10 +105,9 @@ function fix_input($data) {
                                     if ( !isset($keywordIds)) {
                                         $keywordIds = array("".$newId);
                                     } else {
-                                        $keywordIds = array_push($keywordIds,"".$keyRow['id']);
+                                        array_push($keywordIds,"".$keyRow['id']);
                                     }
-                                    error_log("---------- list:" . $keywordIds);
-                                    
+                                    print_r($keywordIds);
                                 }
                                 
                                 $allQuery = " select id, keyword from keyword";
