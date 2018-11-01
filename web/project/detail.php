@@ -117,13 +117,14 @@ function fix_input($data) {
                 <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST">                    
                 <input type="hidden" name="id" value="<?=$id?>">
                 <div>
-                    <div class="topic-row">Topic: <input type="text" name="topic" value="<?=$topic?>"><br></div>
-                        <div>Notes</div><div><textarea name="notes" style="width: 100%" rows="20"><?=$notes?></textarea><br></div>
+                    <div class="label-row">Topic:&nbsp;&nbsp;&nbsp;<input type="text" name="topic" value="<?=$topic?>"><button style="float: right">SAVE</button></div>
+                    <div class="spacer"></div>
+                    <div class="label-row">Notes</div>
+                    <div><textarea name="notes" style="width: 100%" rows="20"><?=$notes?></textarea><br></div>
                         <?php 
                             if ( !$allEmpty ) {
                         ?>
-                        <div><button>SAVE</button></div>
-                        <div>Keywords:
+                        <div class="label-row">Keywords:
                         <?php 
                                 $keyQuery = 'select k.keyword from keyword k, topic_keyword tk where k.id = tk.keyword_id and tk.topic_id = :id';
                                 $keyStmt = $db->prepare($keyQuery);
