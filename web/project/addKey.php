@@ -73,7 +73,6 @@ function fix_input($data) {
             <div class="content">
                 <?php                    
                     if ( isset($id) ) {
-                        error_log("----------id: " . $id);
                         $query = 'select id, topic, researcher_id, notes from topic ';
                         $query = $query . 'where id = :id';
                         $stmt = $db->prepare($query);
@@ -81,7 +80,6 @@ function fix_input($data) {
                         $stmt->execute();
                         $stmt->setFetchMode(PDO::FETCH_ASSOC);
                         $row = $stmt->fetch();
-                        error_log("-----------again:" . $row['id']);
                         $topic = $row['topic'];
                         $notes = $row['notes'];
                     }
@@ -108,7 +106,7 @@ function fix_input($data) {
                                         $keywordIds = array("".$newId);
                                     }
                                     $keywordIds = array_push($keywordIds,"".$keyRow['id']);
-                                    error_log($keywordIds);
+                                    error_log("----------" . $keywordIds);
                                     
                                 }
                                 
