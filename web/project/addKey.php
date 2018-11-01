@@ -105,9 +105,9 @@ function fix_input($data) {
                                     $newId = $keyRow['id'];
                                     error_log("got: " . $newId);
                                     if ( !isset($keywordIds)) {
-                                        $keywordIds = array($newId);
+                                        $keywordIds = array("".$newId);
                                     }
-                                    $keywordIds = array_push($keywordIds,$keyRow['id']);
+                                    $keywordIds = array_push($keywordIds,"".$keyRow['id']);
                                     print_r($keywordsIds);
                                     
                                 }
