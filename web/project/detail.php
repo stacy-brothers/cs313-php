@@ -117,7 +117,7 @@ function fix_input($data) {
                 <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST">                    
                 <input type="hidden" name="id" value="<?=$id?>">
                 <div>
-                    <div class="label-row">Topic:&nbsp;&nbsp;&nbsp;<input type="text" name="topic" value="<?=$topic?>"><button style="float: right">SAVE</button></div>
+                    <div class="label-row">Topic:<span class="topic-input"><input type="text" name="topic" value="<?=$topic?>"></span><button class="save-btn">SAVE</button></div>
                     <div class="spacer"></div>
                     <div class="label-row">Notes</div>
                     <div><textarea name="notes" style="width: 100%" rows="20"><?=$notes?></textarea><br></div>
