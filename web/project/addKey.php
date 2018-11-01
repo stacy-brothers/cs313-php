@@ -101,12 +101,13 @@ function fix_input($data) {
                                 $comma="  ";                                
                                 foreach( $keyStmt->fetchAll() as $keyRow ) {
                                     $newId = $keyRow['id'];
-                                    error_log("got: " . $newId);
+                                    error_log("------ got id: " . $newId);
                                     if ( !isset($keywordIds)) {
                                         $keywordIds = array("".$newId);
+                                    } else {
+                                        $keywordIds = array_push($keywordIds,"".$keyRow['id']);
                                     }
-                                    $keywordIds = array_push($keywordIds,"".$keyRow['id']);
-                                    error_log("----------" . $keywordIds);
+                                    error_log("---------- list:" . $keywordIds);
                                     
                                 }
                                 
