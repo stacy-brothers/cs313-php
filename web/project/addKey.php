@@ -102,12 +102,16 @@ function fix_input($data) {
                                 $keyStmt->execute();
                                 $comma="  ";                                
                                 foreach( $keyStmt->fetchAll() as $keyRow ) {
+                                    $newId = $keyRow['id'];
+                                    error_log("got: " . $newId);
                                     if ( !isset($keywordIds)) {
-                                        $keywordIds = array($keyRow['id']);
+                                        $keywordIds = array($newId);
                                     }
-                                    $keywordIds = array_push($keywordIds,$keyRow['id']);                                    
+                                    $keywordIds = array_push($keywordIds,$keyRow['id']);
+                                    print_r($keywordsIds);
+                                    
                                 }
-                                print_r($keywordsIds);
+                                
                                 $allQuery = " select id, keyword from keyword";
                                 foreach ($db->query($allQuery) as $key) {
                         ?>
