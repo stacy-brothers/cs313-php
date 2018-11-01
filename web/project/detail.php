@@ -128,14 +128,16 @@ function fix_input($data) {
                         ?>
                         <div class="label-row">Keywords:
                         <?php 
-                                $keyQuery = 'select k.keyword from keyword k, topic_keyword tk where k.id = tk.keyword_id and tk.topic_id = :id';
+                                $keyQuery = 'select k.id, k.keyword from keyword k, topic_keyword tk where k.id = tk.keyword_id and tk.topic_id = :id';
                                 $keyStmt = $db->prepare($keyQuery);
                                 $keyStmt->bindParam(':id', $id);
                                 $keyStmt->execute();
-                                $comma="";
+                                $comma="  ";
+                                $keywordList = [];
                                 foreach( $keyStmt->fetchAll() as $keyRow ) {
-                                    echo ' ' . $comma . $keyRow['keyword'];
+                                    echo $comma . $keyRow['keyword'];
                                     $comma = ", ";
+                                    $keywordList[$keyRow['id']] = $keyRow['keyword'];
                                 }
                         ?>
                             <button class="save-btn" onclick="addKeyword();">+</button></div>
@@ -144,6 +146,7 @@ function fix_input($data) {
                 ?>
                         <br>                    
                 </div>
+                <input type="hidden" name="keywordList[]" value="<?=$keywordList?>">
                 </form>
             </div>
         </div>
