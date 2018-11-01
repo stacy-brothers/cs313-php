@@ -100,9 +100,11 @@ function fix_input($data) {
                                 $keyStmt = $db->prepare($keyQuery);
                                 $keyStmt->bindParam(':id', $id);
                                 $keyStmt->execute();
-                                $comma="  ";
-                                $keywordIds = array();
+                                $comma="  ";                                
                                 foreach( $keyStmt->fetchAll() as $keyRow ) {
+                                    if ( !isset($keywordIds)) {
+                                        $keywordIds = array($keyRow['id']);
+                                    }
                                     $keywordIds = array_push($keywordIds,$keyRow['id']);                                    
                                 }
                                 print_r($keywordsIds);
