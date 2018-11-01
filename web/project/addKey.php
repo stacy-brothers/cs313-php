@@ -108,7 +108,7 @@ function fix_input($data) {
                                         $keywordIds = array("".$newId);
                                     }
                                     $keywordIds = array_push($keywordIds,"".$keyRow['id']);
-                                    print_r($keywordsIds);
+                                    error_log($keywordIds);
                                     
                                 }
                                 
