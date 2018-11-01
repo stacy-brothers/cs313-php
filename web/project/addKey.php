@@ -30,52 +30,21 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
     // editing or adding a new topic
     $id = $_GET['id'];
     if ( !isset($id) ) {
-         // must be a new topic
-        $allEmpty = TRUE;
+        error_log("no id passed in to GET...");
+        header('Location: ./search.php');
+        die();
     }
     error_log("doing GET");
 } else if ($_SERVER["REQUEST_METHOD"] == "POST") {  
     error_log("doing POST");
     // updating a topic
     $id = $_POST['id'];
-    if (empty($_POST["topic"])) {
-        $topicErr = "Topic is required";
-        $good = FALSE;
-    } else {
-        $topic = fix_input($_POST["topic"]);        
-    }
-    $notes = fix_input($_POST['notes']);
     if ( isset($id) && $id!=='' ) {
-        error_log("updating an old topic");
-        // updating an old topic
-        $updateSql = "update topic set topic=:topic, notes=:notes where id=:id";
-        try {
-            $stmt = $db->prepare($updateSql);
-            $stmt->execute(array($topic,$notes,$id));         
-        } catch (PDOException $ex) {
-            $addError = "Error updating topic: " . $ex->getMessage();
-            $good = FALSE;
-        }
-        $addKeys = $_POST['addKeys'];
-        if ( isset($addKeys) && $addKeys == "TRUE") {
-            header('Location: ./addKey.php?topicId='.$id);
-            die();
-        }
+        
     } else {
-        error_log("adding a new topic");
-        // adding a new topic
-        $insertSql = "insert into topic (topic, notes) values (:topic,:notes)";
-        try {
-            $stmt = $db->prepare($insertSql);
-            if ( $stmt->execute(array($topic,$notes)) === TRUE ) {
-                $id = $db->lastInsertId();                             
-                error_log("save was successful!");
-            }
-        } catch (PDOException $ex) {
-            error_log("error adding: " . $ex->getMessage());
-            $addError = "Error updating topic: " . $ex->getMessage();
-            $good = FALSE;
-        }
+        error_log("no id passed in to POST...");
+        header('Location: ./search.php');
+        die();
     }
 }
 
@@ -105,7 +74,6 @@ function fix_input($data) {
                 <?php                    
                     if ( isset($id) ) {
                         error_log("----------id: " . $id);
-                        // start with one of the keywords and then reduce the list by the others
                         $query = 'select id, topic, researcher_id, notes from topic ';
                         $query = $query . 'where id = :id';
                         $stmt = $db->prepare($query);
@@ -118,16 +86,10 @@ function fix_input($data) {
                         $notes = $row['notes'];
                     }
                 ?>
-                <div class="page-title"><span><span onclick="goBack();" style='float:left;'><i class='fas fa-chevron-left'></i></span><?=$topic?></div>
+                <div class="page-title"><span><span onclick="goBack();" style='float:left;'><i class='fas fa-chevron-left'></i></span>Adding keywords for <?=$topic?></div>
                 <form id="detailForm" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST">                    
                 <input type="hidden" name="id" value="<?=$id?>">
                 <div>
-                    <div class="spacer"></div>
-                    <div class="label-row"><span>Topic:</span><span class="topic-input"><input type="text" name="topic" value="<?=$topic?>"></span><button class="save-btn">SAVE</button></div>
-                    <div class="spacer"></div>
-                    <div class="label-row">Notes</div>
-                    <div><textarea name="notes" style="width: 100%" rows="20"><?=$notes?></textarea><br></div>
-                    <div class="spacer"></div>
                         <?php 
                             if ( !$allEmpty ) {
                         ?>
@@ -144,7 +106,7 @@ function fix_input($data) {
                                     $comma = ", ";                                    
                                 }
                         ?>
-                        <button class="save-btn" onclick="addKeyword();">+</button></div>
+                        <button class="save-btn">SAVE</button></div>
                 <?php
                             }                    
                 ?>

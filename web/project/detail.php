@@ -58,7 +58,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
         }
         $addKeys = $_POST['addKeys'];
         if ( isset($addKeys) && $addKeys == "TRUE") {
-            header('Location: ./addKey.php?topicId='.$id);
+            header('Location: ./addKey.php?id='.$id);
             die();
         }
     } else {
@@ -105,7 +105,6 @@ function fix_input($data) {
                 <?php                    
                     if ( isset($id) ) {
                         error_log("----------id: " . $id);
-                        // start with one of the keywords and then reduce the list by the others
                         $query = 'select id, topic, researcher_id, notes from topic ';
                         $query = $query . 'where id = :id';
                         $stmt = $db->prepare($query);
