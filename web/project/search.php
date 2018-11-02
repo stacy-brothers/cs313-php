@@ -1,5 +1,7 @@
 <?php
 
+session_start();
+
 try
 {
   $dbUrl = getenv('DATABASE_URL');
@@ -26,7 +28,12 @@ $keywords = [];
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $keywords = $_POST['keywords'];
     $searchStr = $_POST['searchStr'];
+    $_SESSION["searchStr"] = $searchStr;
+    $_SESSION["keywords"] = $keywords;
 }
+
+if ( !isset($searchStr) ) $searchStr = $_SESSION["searchStr"];
+if ( !isset($keywords) || count($keywords) == 0 ) $keywords = $_SESSION["keywords"];
 
 ?>
 <html>
