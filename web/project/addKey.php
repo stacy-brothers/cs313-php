@@ -116,7 +116,7 @@ function fix_input($data) {
                                 $allQuery = " select id, keyword from keyword";
                                 foreach ($db->query($allQuery) as $key) {
                         ?>
-                            <div class="key-item"><input type="checkbox" name="keywords[]" <?php if (isset($keywordIds) && in_array($key['id'], $keywordIds)) echo "checked";?>><?=$key['keyword']?></div>
+                            <div class="key-item"><input type="checkbox" name="keywords[]" value="<?=$key['id']?>" <?php if (isset($keywordIds) && in_array($key['id'], $keywordIds)) echo "checked";?>><?=$key['keyword']?></div>
                         <?php
                                 }
                         ?>
