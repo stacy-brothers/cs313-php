@@ -40,7 +40,6 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
     if ( isset($id) && $id!=='' ) {
         // kind of a klugy way to implement but just blast away the old values and add the posted ones.
         $keywords = $_POST['keywords'];
-        print_r($keywords);
         $keywordIds = loadKeywords($db, $id);
         // delete the old list 
         $delSql = "delete from topic_keyword where topic_id = :id";
