@@ -34,15 +34,34 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
         header('Location: ./search.php');
         die();
     }
+    loadKeywords($id);
 } else if ($_SERVER["REQUEST_METHOD"] == "POST") {  
     $id = $_POST['id'];
     if ( isset($id) && $id!=='' ) {
         $keywords = $_POST['keywords'];
+        print_r($keywords);
+        loadKeywords($id);
         
     } else {
         error_log("no id passed in to POST...");
         header('Location: ./search.php');
         die();
+    }
+}
+
+function loadKeywords($tId) {
+    $keyQuery = 'select k.id, k.keyword from keyword k, topic_keyword tk where k.id = tk.keyword_id and tk.topic_id = :id';
+    $keyStmt = $db->prepare($keyQuery);
+    $keyStmt->bindParam(':id', $tId);
+    $keyStmt->execute();
+    $comma="  ";                                
+    foreach( $keyStmt->fetchAll() as $keyRow ) {
+        $newId = $keyRow['id'];
+        if ( !isset($keywordIds)) {
+            $keywordIds = array("".$newId);
+        } else {
+            array_push($keywordIds,"".$keyRow['id']);
+        }                                    
     }
 }
 
@@ -92,19 +111,6 @@ function fix_input($data) {
                         <div class="label-row">Keywords<button class="save-btn">SAVE</button></div>
                         <div class="key-list">
                         <?php 
-                                $keyQuery = 'select k.id, k.keyword from keyword k, topic_keyword tk where k.id = tk.keyword_id and tk.topic_id = :id';
-                                $keyStmt = $db->prepare($keyQuery);
-                                $keyStmt->bindParam(':id', $id);
-                                $keyStmt->execute();
-                                $comma="  ";                                
-                                foreach( $keyStmt->fetchAll() as $keyRow ) {
-                                    $newId = $keyRow['id'];
-                                    if ( !isset($keywordIds)) {
-                                        $keywordIds = array("".$newId);
-                                    } else {
-                                        array_push($keywordIds,"".$keyRow['id']);
-                                    }                                    
-                                }
                                 
                                 $allQuery = " select id, keyword from keyword";
                                 foreach ($db->query($allQuery) as $key) {
