@@ -34,12 +34,10 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
         header('Location: ./search.php');
         die();
     }
-    error_log("doing GET");
 } else if ($_SERVER["REQUEST_METHOD"] == "POST") {  
-    error_log("doing POST");
-    // updating a topic
     $id = $_POST['id'];
     if ( isset($id) && $id!=='' ) {
+        $keywords = $_POST['keywords'];
         
     } else {
         error_log("no id passed in to POST...");
@@ -101,13 +99,11 @@ function fix_input($data) {
                                 $comma="  ";                                
                                 foreach( $keyStmt->fetchAll() as $keyRow ) {
                                     $newId = $keyRow['id'];
-                                    error_log("------ got id: " . $newId);
                                     if ( !isset($keywordIds)) {
                                         $keywordIds = array("".$newId);
                                     } else {
                                         array_push($keywordIds,"".$keyRow['id']);
-                                    }
-                                    print_r($keywordIds);
+                                    }                                    
                                 }
                                 
                                 $allQuery = " select id, keyword from keyword";
@@ -124,7 +120,7 @@ function fix_input($data) {
                         </div>
                         <br>                    
                 </div>
-                <input type="hidden" name="addKeys" id="addKeys">
+                <input type="hidden" name="addKeys" id="addKeys">                
                 </form>
             </div>
         </div>
