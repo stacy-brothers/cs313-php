@@ -6,4 +6,7 @@
 .key-item {
     background-color: #adec8d;
     border: 1px solid black;
+    padding: 4;
+    margin: 6 6 0 6;
+    font-size: 17px;
 }
