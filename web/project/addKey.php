@@ -38,10 +38,23 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
 } else if ($_SERVER["REQUEST_METHOD"] == "POST") {  
     $id = $_POST['id'];
     if ( isset($id) && $id!=='' ) {
+        // kind of a klugy way to implement but just blast away the old values and add the posted ones.
         $keywords = $_POST['keywords'];
         print_r($keywords);
         $keywordIds = loadKeywords($db, $id);
-        
+        // delete the old list 
+        $delSql = "delete from topic_keyword where topic_id = :id";
+        $delStmt = $db->prepare($delSql);
+        $delStmt->bindParam(':id', $id);
+        $delStmt->execute();
+        // now add the new values
+        foreach ($keywords as $keyId) {
+            $insSql = "insert into topic_keyword (topic_id,keyword_id) values (:topicId, :keyId)";
+            $insStmt = $db->prepare($insSql);
+            $insStmt->bindParam(':topicId', $id);
+            $insStmt->bindParam(':keyId', $keyId);
+        }
+        $keywordIds = loadKeywords($db, $id);
     } else {
         error_log("no id passed in to POST...");
         header('Location: ./search.php');
