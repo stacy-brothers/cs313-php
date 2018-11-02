@@ -55,7 +55,21 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
             $insStmt->bindParam(':keyId', $keyId);
             $insStmt->execute();
         }
-        $keywordIds = loadKeywords($db, $id);
+        // now add a new keyword if there is one.
+        $newKey = $_POST['newKey'];
+        if ( isset($newKey) && strlen(trim($newKey)) > 0 ) {
+            $newSql = "insert into keyword (keyword) values (:newKey)";
+            $newStmt = $db->prepare($newSql);
+            $newStmt->bindParam("newKey", $newKey);
+            if ($newStmt->execute()) {
+                // add it to the 
+                $newId = $db->lastInsertId();
+                $insStmt->bindParam(':topicId', $id);
+                $insStmt->bindParam(':keyId', $newId);
+                $insStmt->execute();
+            }
+        }
+        $keywordIds = loadKeywords($db, $id);        
     } else {
         error_log("no id passed in to POST...");
         header('Location: ./search.php');
@@ -116,27 +130,22 @@ function fix_input($data) {
                         $notes = $row['notes'];
                     }
                 ?>
-                <div class="page-title"><span><span onclick="goBack();" style='float:left;'><i class='fas fa-chevron-left'></i></span>Adding keywords for <?=$topic?></div>
+                <div class="page-title"><span><span onclick="goBack();" style='float:left;'><i class='fas fa-chevron-left'></i></span>Adding keywords for topic: <?=$topic?></div>
                 <form id="detailForm" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST">                    
                 <input type="hidden" name="id" value="<?=$id?>">
                 <div>
-                        <?php 
-                            if ( !$allEmpty ) {
-                        ?>
-                        <div class="label-row">Keywords<button class="save-btn">SAVE</button></div>
-                        <div class="key-list">
-                        <?php 
-                                
-                                $allQuery = " select id, keyword from keyword";
-                                foreach ($db->query($allQuery) as $key) {
-                        ?>
-                            <div class="key-item"><input type="checkbox" name="keywords[]" value="<?=$key['id']?>" <?php if (isset($keywordIds) && in_array($key['id'], $keywordIds)) echo "checked";?>><?=$key['keyword']?></div>
-                        <?php
-                                }
-                        ?>
-                        
+                <div class="label-row"><span>New Keyword:</span><span class="topic-input"><input type="text" name="newKey"></span><button class="save-btn">ADD</button></div>
+                <div class="spacer"></div>
+                <div class="label-row">Keywords<button class="save-btn">SAVE</button></div>
+                <div class="key-list">
+                <?php 
+
+                        $allQuery = " select id, keyword from keyword";
+                        foreach ($db->query($allQuery) as $key) {
+                ?>
+                    <div class="key-item"><input type="checkbox" name="keywords[]" value="<?=$key['id']?>" <?php if (isset($keywordIds) && in_array($key['id'], $keywordIds)) echo "checked";?>><?=$key['keyword']?></div>
                 <?php
-                            }                    
+                        }                    
                 ?>
                         </div>
                         <br>                    
