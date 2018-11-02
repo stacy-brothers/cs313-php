@@ -1,0 +1,10 @@
+.key-list {
+    display: flex;
+    flex-direction: row;
+}
+
+.key-item {
+    flex: 1 1 auto;
+    background-color: #adec8d;
+    border: 1px solid black;
+}
