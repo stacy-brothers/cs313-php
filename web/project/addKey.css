@@ -1,11 +1,9 @@
 .key-list {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(auto-fill,minmax(160px, 1fr));
 }
 
 .key-item {
-    flex: 1 1 auto;
     background-color: #adec8d;
     border: 1px solid black;
 }
