@@ -143,7 +143,7 @@ function fix_input($data) {
                                     $comma = ", ";                                    
                                 }
                         ?>
-                        <button class="save-btn" onclick="addKeyword();">+</button></div>
+                        <button class="save-btn" onclick="addKeyword();">EDIT</button></div>
                 <?php
                             }                    
                 ?>
