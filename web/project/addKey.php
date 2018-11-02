@@ -134,6 +134,7 @@ function fix_input($data) {
                 <form id="detailForm" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST">                    
                 <input type="hidden" name="id" value="<?=$id?>">
                 <div>
+                <div class="spacer"></div>
                 <div class="label-row"><span>New Keyword:</span><span class="topic-input"><input type="text" name="newKey"></span><button class="save-btn">ADD</button></div>
                 <div class="spacer"></div>
                 <div class="label-row">Keywords<button class="save-btn">SAVE</button></div>
