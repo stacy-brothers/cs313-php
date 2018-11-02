@@ -34,13 +34,13 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
         header('Location: ./search.php');
         die();
     }
-    loadKeywords($id);
+    $keywordIds = loadKeywords($db, $id);
 } else if ($_SERVER["REQUEST_METHOD"] == "POST") {  
     $id = $_POST['id'];
     if ( isset($id) && $id!=='' ) {
         $keywords = $_POST['keywords'];
         print_r($keywords);
-        loadKeywords($id);
+        $keywordIds = loadKeywords($db, $id);
         
     } else {
         error_log("no id passed in to POST...");
@@ -49,7 +49,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
     }
 }
 
-function loadKeywords($tId) {
+function loadKeywords($db, $tId) {
     $keyQuery = 'select k.id, k.keyword from keyword k, topic_keyword tk where k.id = tk.keyword_id and tk.topic_id = :id';
     $keyStmt = $db->prepare($keyQuery);
     $keyStmt->bindParam(':id', $tId);
@@ -63,6 +63,7 @@ function loadKeywords($tId) {
             array_push($keywordIds,"".$keyRow['id']);
         }                                    
     }
+    return $keywordIds;
 }
 
 function fix_input($data) {
