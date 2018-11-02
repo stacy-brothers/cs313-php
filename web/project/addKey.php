@@ -48,11 +48,12 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
         $delStmt->bindParam(':id', $id);
         $delStmt->execute();
         // now add the new values
+        $insSql = "insert into topic_keyword (topic_id,keyword_id) values (:topicId, :keyId)";
+        $insStmt = $db->prepare($insSql);
         foreach ($keywords as $keyId) {
-            $insSql = "insert into topic_keyword (topic_id,keyword_id) values (:topicId, :keyId)";
-            $insStmt = $db->prepare($insSql);
             $insStmt->bindParam(':topicId', $id);
             $insStmt->bindParam(':keyId', $keyId);
+            $insStmt->execute();
         }
         $keywordIds = loadKeywords($db, $id);
     } else {
